@@ -41,8 +41,12 @@ a {
   color: var(--accent);
   text-decoration: none;
 }
-a:hover {
+/* Only links in running text are underlined, at rest and on hover/focus */
+p a,
+li a,
+.prose a {
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -74,13 +78,27 @@ p {
   font-size: 13px;
   color: var(--ink-3);
 }
-/* Standalone text links: at least 24px tall (WCAG 2.5.8) */
+/* Standalone text links: at least 24px tall (WCAG 2.5.8), no underline;
+   colour shifts to the accent on hover/focus alongside the focus ring */
 .topbar a,
 .page-nav a,
 .site-footer a {
   display: inline-flex;
   align-items: center;
   min-height: 24px;
+}
+.topbar a:not(.wordmark),
+.page-nav a,
+.site-footer a {
+  color: var(--ink-2);
+}
+.topbar a:hover,
+.topbar a:focus-visible,
+.page-nav a:hover,
+.page-nav a:focus-visible,
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--accent);
 }
 .site-footer {
   margin-top: 64px;
@@ -94,9 +112,6 @@ p {
   line-height: 24px;
   font-weight: 600;
   letter-spacing: 0.12em;
-}
-.wordmark:hover {
-  text-decoration: none;
 }
 .dot {
   display: inline-block;
@@ -200,7 +215,6 @@ a.card {
   color: inherit;
 }
 a.card:hover {
-  text-decoration: none;
   border-color: var(--accent);
 }
 .card.dashed {
@@ -242,9 +256,6 @@ a.card:hover {
   background: transparent;
   color: var(--ink);
   cursor: pointer;
-}
-.btn:hover {
-  text-decoration: none;
 }
 .btn.primary {
   background: var(--accent);
@@ -311,9 +322,9 @@ a.card:hover {
   border: 1.5px solid var(--ink);
   border-radius: 8px;
   color: var(--ink);
+  text-decoration: none;
 }
 .map-mobile a:hover {
-  text-decoration: none;
   border-color: var(--accent);
 }
 .col-label {
@@ -352,9 +363,6 @@ a.card:hover {
 .node-link {
   cursor: pointer;
   outline: none;
-}
-.node-link:hover {
-  text-decoration: none;
 }
 .node-link:focus-visible .node rect {
   stroke: var(--accent);
