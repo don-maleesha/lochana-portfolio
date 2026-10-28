@@ -16,7 +16,12 @@ export default function Project() {
   if (!project) {
     return (
       <Shell crumb="projects / not found">
-        <p className="lede">No such project. <Link to="/projects">Back to projects</Link></p>
+        <div className="stack" style={{ gap: 12 }}>
+          <h1 className="h-page">Project not found</h1>
+          <p className="lede">
+            No such project. <Link to="/projects">Back to projects</Link>
+          </p>
+        </div>
       </Shell>
     )
   }
@@ -30,6 +35,9 @@ export default function Project() {
       <div className="stack">
         {/* key forces the deploy log to replay when switching projects */}
         <BuildLog key={project.slug} target={`projects/${project.slug}`} onDone={() => setLiveSlug(project.slug)} />
+
+        {/* Keep exactly one h1 on the page while the deploy log runs */}
+        {!live && <h1 className="sr-only">{project.name}</h1>}
 
         {live && (
           <motion.div
