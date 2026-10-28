@@ -353,6 +353,9 @@ a.card:hover {
   cursor: pointer;
   outline: none;
 }
+.node-link:hover {
+  text-decoration: none;
+}
 .node-link:focus-visible .node rect {
   stroke: var(--accent);
   stroke-width: 3;
