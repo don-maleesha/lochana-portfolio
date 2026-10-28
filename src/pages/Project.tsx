@@ -82,7 +82,7 @@ export default function Project() {
 
             <div className="placeholder">[ mini architecture diagram of this project — same visual language as the landing map ]</div>
 
-            <nav style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16, paddingTop: 24, borderTop: '1px solid var(--line)', fontSize: 13 }}>
+            <nav className="page-nav" aria-label="Project navigation" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16, paddingTop: 24, borderTop: '1px solid var(--line)', fontSize: 13 }}>
               {prev ? <Link to={`/projects/${prev.slug}`}>← previous project</Link> : <span />}
               <Link to="/">back to map</Link>
               {next ? <Link to={`/projects/${next.slug}`}>next project →</Link> : <span />}
