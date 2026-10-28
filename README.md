@@ -1,3 +1,32 @@
+# Lochana — portfolio
+
+A personal portfolio modelled as a small system architecture:
+Visitor → Gateway → Services (About, Projects, Experience, Contact) → Data stores.
+Clicking a service on the landing map "deploys" its page.
+
+## Status
+
+- Landing system map, routing and all pages (About, Projects, project case
+  study, Experience, Contact) are in place.
+- All copy apart from the current role and degree is placeholder text in
+  `[square brackets]`.
+- The contact form is a demo: it shows a mock response and sends nothing.
+- SPA rewrites are configured for Vercel (`vercel.json`) and Netlify
+  (`public/_redirects`).
+- `typescript` is aliased to `@typescript/typescript6` so typescript-eslint
+  can run; `tsc` itself is TypeScript 7 via `@typescript/native`.
+
+## Structure
+
+- `src/data/` — content config. `system.ts` defines the map's services and
+  data stores (add a node by adding one object), `projects.ts` the project
+  case studies, `experience.ts` roles and education as releases.
+- `src/components/` — `Shell` (top bar and layout), `SystemMap` (the
+  landing SVG map with a mobile list fallback) and `BuildLog` (the deploy
+  intro on project pages).
+- `src/pages/` — one component per route: `Home`, `About`, `Projects`,
+  `Project` (`/projects/:slug`), `Experience`, `Contact`.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
