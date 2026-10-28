@@ -1,17 +1,21 @@
 /* ---------- Design tokens (from the wireframes) ---------- */
 :root {
-  --bg: #fafaf8;
-  --surface: #ffffff;
-  --panel: #f0efea;
-  --ink: #1a1a1a;
-  --ink-2: #3a3a36;
-  --ink-3: #6b6b66;
-  --line: #d9d8d2;
-  --line-strong: #8a8a84;
-  --accent: #3b4fd9;
-  --accent-tint: #ecefff;
-  --ok: #1f7a4d;
-  --error: #b3261e;
+  color-scheme: dark;
+  --bg: #0B0D14;
+  --surface: #12151F;
+  --panel: #171B28;
+  --ink: #E8EAF2;
+  --ink-2: #C3C8DA;
+  --ink-3: #8A90A6;
+  --line: #232838;
+  --line-strong: #4A5068;
+  --accent: #7C8CFF;
+  --accent-tint: #1B2040;
+  --ok: #3DDC97;
+  --on-accent: #0B0D14;
+  /* Not in the base palette: chosen for contrast on the dark surfaces */
+  --edge: #5E6584; /* 3.4:1 on --bg for map edges and arrowheads */
+  --error: #F87171; /* 6.2:1+ on --bg, --surface and --panel */
   --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   --sans: 'IBM Plex Sans', system-ui, sans-serif;
   --maxw: 1312px;
@@ -245,7 +249,7 @@ a.card:hover {
 .btn.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
 .placeholder {
   display: flex;
@@ -325,7 +329,7 @@ a.card:hover {
 }
 .node.store rect {
   fill: transparent;
-  stroke: var(--line-strong);
+  stroke: var(--edge);
   stroke-dasharray: 5 4;
 }
 .node .t {
@@ -355,7 +359,7 @@ a.card:hover {
 }
 .edge {
   fill: none;
-  stroke: var(--line-strong);
+  stroke: var(--edge);
   stroke-width: 2;
   stroke-linecap: round;
   transition: stroke 0.2s;
@@ -364,7 +368,7 @@ a.card:hover {
   stroke: var(--accent);
 }
 .head path {
-  fill: var(--line-strong);
+  fill: var(--edge);
 }
 .head-active path {
   fill: var(--accent);
@@ -417,6 +421,11 @@ a.card:hover {
   background: var(--bg);
   border: 1.5px solid var(--ink);
   border-radius: 8px;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--ink-3);
+  opacity: 1;
 }
 .field textarea {
   padding: 12px 14px;
