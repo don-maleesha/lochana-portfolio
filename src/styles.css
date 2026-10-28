@@ -271,6 +271,16 @@ a.card:hover {
   gap: 8px;
   font-size: 13px;
 }
+ul.chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 20px 32px;
+}
 .chip {
   padding: 4px 12px;
   border: 1.5px solid var(--ink);

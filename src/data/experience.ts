@@ -27,10 +27,10 @@ export const releases: Release[] = [
   },
   {
     id: 'v1',
-    tag: 'v1.0 · 2025',
+    tag: 'v1.0',
     title: 'BSc. Information Systems',
     org: 'University of Colombo School of Computing',
-    period: 'Graduated 2025',
+    period: 'Graduated',
     notes: ['[Focus areas, final-year project or achievements]'],
     stack: [],
     projects: [],
