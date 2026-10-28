@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { availability } from '../data/availability'
 import { profile } from '../data/profile'
 
 export default function Shell({ crumb, children }: { crumb?: string; children: ReactNode }) {
@@ -19,10 +20,13 @@ export default function Shell({ crumb, children }: { crumb?: string; children: R
             <span className="wordmark-short">{profile.shortName}</span>
           </Link>
         )}
-        <div>
-          <span className="dot" aria-hidden="true" />
-          all systems operational
-        </div>
+        {/* Static text, not a live region: the words carry the meaning, the dot is decoration */}
+        {availability.show && (
+          <div className="status">
+            <span className="dot" aria-hidden="true" />
+            {availability.text}
+          </div>
+        )}
       </header>
       <main id="main" tabIndex={-1}>
         {children}
