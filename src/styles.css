@@ -419,6 +419,24 @@ a.card:hover {
 .head-active path {
   fill: var(--accent);
 }
+/* Request packet and the stage it has just reached */
+.packet {
+  fill: var(--accent);
+  pointer-events: none;
+}
+.node[data-pulse] rect {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+/* Static route highlight, used instead of the packet when motion is reduced */
+.route-static {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-static {
+    display: inline;
+  }
+}
 
 @media (max-width: 760px) {
   .map-svg {
