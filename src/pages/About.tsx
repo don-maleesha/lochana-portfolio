@@ -1,6 +1,8 @@
 import Shell from '../components/Shell'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 export default function About() {
+  usePageTitle('About — Lochana')
   return (
     <Shell crumb="about">
       <div className="stack">

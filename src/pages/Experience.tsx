@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Shell from '../components/Shell'
+import { usePageTitle } from '../hooks/usePageTitle'
 import { releases } from '../data/experience'
 
 export default function Experience() {
+  usePageTitle('Experience — Lochana')
   const [selectedId, setSelectedId] = useState(releases[0].id)
   const selected = releases.find((r) => r.id === selectedId) ?? releases[0]
 

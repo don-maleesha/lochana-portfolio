@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import Shell from '../components/Shell'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 export default function Contact() {
+  usePageTitle('Contact — Lochana')
   const [sent, setSent] = useState(false)
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {

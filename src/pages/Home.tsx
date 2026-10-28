@@ -1,7 +1,9 @@
 import Shell from '../components/Shell'
+import { usePageTitle } from '../hooks/usePageTitle'
 import SystemMap from '../components/SystemMap'
 
 export default function Home() {
+  usePageTitle('Lochana — Software Engineer')
   return (
     <Shell>
       <div className="stack">

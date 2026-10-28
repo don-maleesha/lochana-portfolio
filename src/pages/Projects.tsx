@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import Shell from '../components/Shell'
+import { usePageTitle } from '../hooks/usePageTitle'
 import { projects } from '../data/projects'
 
 export default function Projects() {
+  usePageTitle('Projects — Lochana')
   return (
     <Shell crumb="projects">
       <div className="stack">
