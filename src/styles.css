@@ -1,0 +1,146 @@
+/* ---------- Design tokens (from the wireframes) ---------- */
+:root {
+  --bg: #fafaf8;
+  --surface: #ffffff;
+  --panel: #f0efea;
+  --ink: #1a1a1a;
+  --ink-2: #3a3a36;
+  --ink-3: #6b6b66;
+  --line: #d9d8d2;
+  --line-strong: #8a8a84;
+  --accent: #3b4fd9;
+  --accent-tint: #ecefff;
+  --ok: #1f7a4d;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --maxw: 1312px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* ---------- Layout ---------- */
+.shell {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 32px 32px 64px;
+}
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.wordmark {
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.wordmark:hover {
+  text-decoration: none;
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.row-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.col {
+  flex: 1 1 420px;
+  min-width: 0;
+}
+
+/* ---------- Type ---------- */
+.eyebrow {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.h-display {
+  font-family: var(--sans);
+  font-size: clamp(44px, 7vw, 76px);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.h-page {
+  font-family: var(--sans);
+  font-size: clamp(34px, 5vw, 48px);
+  line-height: 1.17;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.h-card {
+  font-family: var(--sans);
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+}
+.lede {
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--ink-2);
+  max-width: 560px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
