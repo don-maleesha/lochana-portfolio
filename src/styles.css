@@ -163,6 +163,9 @@ p {
 .skip-link:focus {
   transform: none;
 }
+#main {
+  position: relative;
+}
 #main:focus {
   outline: none;
 }
@@ -176,6 +179,22 @@ p {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Sits in the topbar's 40px bottom margin, out of flow, so it never moves the content */
+.deploy-strip {
+  position: absolute;
+  top: -32px;
+  left: 0;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+  color: var(--ink-3);
+  pointer-events: none;
+  transform-origin: top;
+}
+.deploy-ok {
+  color: var(--ok);
 }
 
 /* ---------- Type ---------- */

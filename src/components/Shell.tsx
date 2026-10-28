@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import DeployStrip from './DeployStrip'
 import { availability } from '../data/availability'
 import { profile } from '../data/profile'
 
@@ -29,6 +30,7 @@ export default function Shell({ crumb, children }: { crumb?: string; children: R
         )}
       </header>
       <main id="main" tabIndex={-1}>
+        <DeployStrip />
         {children}
       </main>
       <footer className="site-footer">

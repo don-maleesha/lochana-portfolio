@@ -3,6 +3,7 @@ import type { PointerEvent, Ref } from 'react'
 import { Link } from 'react-router-dom'
 import { animate } from 'framer-motion'
 import { services } from '../data/system'
+import type { MapLinkState } from './DeployStrip'
 
 const W = 1060
 const PAD_B = 8
@@ -66,6 +67,9 @@ function pointAt(pts: Point[], t: number): Point {
   }
   return pts[pts.length - 1]
 }
+
+// Tells the destination page to play its deploy strip
+const fromMap: MapLinkState = { fromMap: true }
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -280,6 +284,7 @@ export default function SystemMap() {
             <g key={s.id}>
               <Link
                 to={s.path}
+                state={fromMap}
                 className="node-link"
                 aria-label={`${s.label} — ${s.method} ${s.path}`}
                 onMouseEnter={() => setActive(s.id)}
@@ -323,7 +328,7 @@ export default function SystemMap() {
       <ol className="map-mobile" aria-label="Sections">
         {services.map((s) => (
           <li key={s.id}>
-            <Link to={s.path}>
+            <Link to={s.path} state={fromMap}>
               <span>
                 <strong>{s.label}</strong> <span className="muted">{s.path}</span>
               </span>
