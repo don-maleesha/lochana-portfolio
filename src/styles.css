@@ -138,6 +138,106 @@ p {
   max-width: 560px;
 }
 
+/* ---------- Components ---------- */
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+a.card {
+  color: inherit;
+}
+a.card:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+}
+.card.dashed {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--line-strong);
+  color: var(--ink-3);
+}
+.card.selected {
+  background: var(--accent-tint);
+  border: 2px solid var(--accent);
+}
+.card-title {
+  font-weight: 600;
+}
+.muted {
+  color: var(--ink-3);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+}
+.chip {
+  padding: 4px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 24px;
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.btn:hover {
+  text-decoration: none;
+}
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  padding: 16px;
+  text-align: center;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: 8px;
+  color: var(--ink-3);
+  font-size: 13px;
+}
+.terminal {
+  background: var(--panel);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 188px;
+}
+.progress {
+  height: 8px;
+  background: var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.progress > div {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.28s linear;
+}
+
 /* ---------- System map ---------- */
 .map-svg {
   display: block;
@@ -236,6 +336,41 @@ p {
   .shell {
     padding: 24px 20px 48px;
   }
+}
+
+/* ---------- Contact form ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field label {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0 14px;
+  min-height: 44px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+}
+.field textarea {
+  padding: 12px 14px;
+  min-height: 160px;
+  resize: vertical;
+}
+pre.json {
+  margin: 0;
+  font: 400 13px/22px var(--mono);
+  white-space: pre-wrap;
 }
 
 @media (prefers-reduced-motion: reduce) {
