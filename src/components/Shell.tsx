@@ -25,6 +25,9 @@ export default function Shell({ crumb, children }: { crumb?: string; children: R
       <main id="main" tabIndex={-1}>
         {children}
       </main>
+      <footer className="site-footer">
+        <Link to="/accessibility">Accessibility</Link>
+      </footer>
     </div>
   )
 }

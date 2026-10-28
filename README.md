@@ -24,8 +24,9 @@ Clicking a service on the landing map "deploys" its page.
 - `src/components/` — `Shell` (top bar and layout), `SystemMap` (the
   landing SVG map with a mobile list fallback) and `BuildLog` (the deploy
   intro on project pages).
+- `src/hooks/` — `usePageTitle` (per-route document title and focus).
 - `src/pages/` — one component per route: `Home`, `About`, `Projects`,
-  `Project` (`/projects/:slug`), `Experience`, `Contact`.
+  `Project` (`/projects/:slug`), `Experience`, `Contact`, `Accessibility`.
 
 # React + TypeScript + Vite
 

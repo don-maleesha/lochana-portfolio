@@ -72,10 +72,17 @@ p {
 }
 /* Standalone text links: at least 24px tall (WCAG 2.5.8) */
 .topbar a,
-.page-nav a {
+.page-nav a,
+.site-footer a {
   display: inline-flex;
   align-items: center;
   min-height: 24px;
+}
+.site-footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
 }
 .wordmark {
   color: var(--ink);

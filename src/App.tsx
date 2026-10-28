@@ -7,6 +7,7 @@ import Projects from './pages/Projects'
 import Project from './pages/Project'
 import Experience from './pages/Experience'
 import Contact from './pages/Contact'
+import Accessibility from './pages/Accessibility'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/projects/:slug" element={<Project />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/accessibility" element={<Accessibility />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </MotionConfig>
