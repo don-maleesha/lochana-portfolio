@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { profile } from '../data/profile'
 
 export default function Shell({ crumb, children }: { crumb?: string; children: ReactNode }) {
   return (
@@ -14,7 +15,8 @@ export default function Shell({ crumb, children }: { crumb?: string; children: R
           </div>
         ) : (
           <Link to="/" className="wordmark">
-            LOCHANA
+            <span className="wordmark-full">{profile.name}</span>
+            <span className="wordmark-short">{profile.shortName}</span>
           </Link>
         )}
         <div>

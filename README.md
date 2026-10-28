@@ -1,4 +1,4 @@
-# Lochana — portfolio
+# Lochana Thilakarathne — portfolio
 
 A personal portfolio modelled as a small system architecture:
 Visitor → Gateway → Services (About, Projects, Experience, Contact) → Data stores.

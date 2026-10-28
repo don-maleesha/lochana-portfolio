@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import Shell from '../components/Shell'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { profile } from '../data/profile'
 
 type Field = 'name' | 'email' | 'message'
 type Errors = Partial<Record<Field, string>>
@@ -20,7 +21,7 @@ function validate(form: HTMLFormElement): Errors {
 }
 
 export default function Contact() {
-  usePageTitle('Contact — Lochana')
+  usePageTitle(`Contact — ${profile.name}`)
   const [sent, setSent] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
 

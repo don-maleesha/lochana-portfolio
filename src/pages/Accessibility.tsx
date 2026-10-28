@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import Shell from '../components/Shell'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { profile } from '../data/profile'
 
 export default function Accessibility() {
-  usePageTitle('Accessibility — Lochana')
+  usePageTitle(`Accessibility — ${profile.name}`)
   return (
     <Shell crumb="accessibility">
       <div className="stack">

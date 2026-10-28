@@ -112,6 +112,19 @@ p {
   line-height: 24px;
   font-weight: 600;
   letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* Only one variant is rendered, so the accessible name matches what is shown */
+.wordmark-short {
+  display: none;
+}
+@media (max-width: 479px) {
+  .wordmark-full {
+    display: none;
+  }
+  .wordmark-short {
+    display: inline;
+  }
 }
 .dot {
   display: inline-block;

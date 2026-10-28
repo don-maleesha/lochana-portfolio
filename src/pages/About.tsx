@@ -1,8 +1,9 @@
 import Shell from '../components/Shell'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { profile } from '../data/profile'
 
 export default function About() {
-  usePageTitle('About — Lochana')
+  usePageTitle(`About — ${profile.name}`)
   return (
     <Shell crumb="about">
       <div className="stack">

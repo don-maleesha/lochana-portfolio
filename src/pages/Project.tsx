@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import Shell from '../components/Shell'
 import BuildLog from '../components/BuildLog'
 import { usePageTitle } from '../hooks/usePageTitle'
+import { profile } from '../data/profile'
 import { projects } from '../data/projects'
 
 export default function Project() {
@@ -13,7 +14,7 @@ export default function Project() {
   // Track which project went live so prev/next navigation replays the deploy
   const [liveSlug, setLiveSlug] = useState<string | null>(null)
   const reduceMotion = useReducedMotion()
-  usePageTitle(project ? `${project.name} — Lochana` : 'Project not found — Lochana')
+  usePageTitle(`${project ? project.name : 'Project not found'} — ${profile.name}`)
 
   if (!project) {
     return (
