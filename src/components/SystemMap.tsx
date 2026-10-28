@@ -52,7 +52,7 @@ export default function SystemMap() {
         role="group"
         aria-label="System map: visitor, gateway, services and data stores"
       >
-        <defs>
+        <defs aria-hidden="true">
           <marker id="head" className="head" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="8" markerHeight="8" orient="auto">
             <path d="M0 0 L8 4 L0 8 Z" />
           </marker>
@@ -61,16 +61,16 @@ export default function SystemMap() {
           </marker>
         </defs>
 
-        <text className="col-label" x={CLIENT.x} y={MID - NODE_H / 2 - 16}>CLIENT</text>
-        <text className="col-label" x={GATEWAY.x} y={MID - NODE_H / 2 - 16}>GATEWAY</text>
-        <text className="col-label" x={SERVICE.x} y={first - NODE_H / 2 - 16}>SERVICES</text>
-        <text className="col-label" x={STORE.x} y={first - NODE_H / 2 - 16}>DATA</text>
+        <text className="col-label" aria-hidden="true" x={CLIENT.x} y={MID - NODE_H / 2 - 16}>CLIENT</text>
+        <text className="col-label" aria-hidden="true" x={GATEWAY.x} y={MID - NODE_H / 2 - 16}>GATEWAY</text>
+        <text className="col-label" aria-hidden="true" x={SERVICE.x} y={first - NODE_H / 2 - 16}>SERVICES</text>
+        <text className="col-label" aria-hidden="true" x={STORE.x} y={first - NODE_H / 2 - 16}>DATA</text>
 
         {/* client -> gateway */}
-        <path className="edge" d={`M ${CLIENT.x + CLIENT.w} ${MID} H ${GATEWAY.x - HEAD_GAP}`} markerEnd="url(#head)" />
+        <path className="edge" aria-hidden="true" d={`M ${CLIENT.x + CLIENT.w} ${MID} H ${GATEWAY.x - HEAD_GAP}`} markerEnd="url(#head)" />
         {/* gateway -> trunk */}
-        <path className="edge" d={`M ${GATEWAY.x + GATEWAY.w} ${MID} H ${TRUNK_X}`} />
-        <path className="edge" d={`M ${TRUNK_X} ${first} V ${last}`} />
+        <path className="edge" aria-hidden="true" d={`M ${GATEWAY.x + GATEWAY.w} ${MID} H ${TRUNK_X}`} />
+        <path className="edge" aria-hidden="true" d={`M ${TRUNK_X} ${first} V ${last}`} />
 
         {services.map((s, i) => {
           const cy = rowY(i)
@@ -78,9 +78,10 @@ export default function SystemMap() {
           const marker = on ? 'url(#head-active)' : 'url(#head)'
           return (
             <g key={s.id}>
-              <path className={`edge${on ? ' active' : ''}`} d={`M ${TRUNK_X} ${cy} H ${SERVICE.x - HEAD_GAP}`} markerEnd={marker} />
+              <path className={`edge${on ? ' active' : ''}`} aria-hidden="true" d={`M ${TRUNK_X} ${cy} H ${SERVICE.x - HEAD_GAP}`} markerEnd={marker} />
               <path
                 className={`edge${on ? ' active' : ''}`}
+                aria-hidden="true"
                 d={`M ${SERVICE.x + SERVICE.w} ${cy} H ${STORE.x - HEAD_GAP}`}
                 markerEnd={marker}
               />
