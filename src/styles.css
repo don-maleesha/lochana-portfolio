@@ -11,6 +11,7 @@
   --accent: #3b4fd9;
   --accent-tint: #ecefff;
   --ok: #1f7a4d;
+  --error: #b3261e;
   --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   --sans: 'IBM Plex Sans', system-ui, sans-serif;
   --maxw: 1312px;
@@ -377,7 +378,19 @@ a.card:hover {
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--ink-3);
+}
+.field-error {
+  font-size: 13px;
+  color: var(--error);
+}
+.field-error::before {
+  content: '! ' / '';
+  font-weight: 600;
+}
+.field [aria-invalid='true'] {
+  border-color: var(--error);
 }
 .field input,
 .field textarea {
