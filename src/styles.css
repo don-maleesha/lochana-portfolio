@@ -287,6 +287,28 @@ a.card:hover {
   color: var(--ink-3);
   font-size: 13px;
 }
+.status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 8px;
+  padding: 12px 16px;
+  text-align: center;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: 8px;
+  color: var(--ink-3);
+  font-size: 13px;
+}
+/* Narrow screens: one item per line, no dangling separator */
+@media (max-width: 479px) {
+  .status-bar {
+    flex-direction: column;
+  }
+  .status-bar-sep {
+    display: none;
+  }
+}
 .terminal {
   background: var(--panel);
   border: 1.5px solid var(--ink);

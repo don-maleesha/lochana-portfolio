@@ -2,6 +2,7 @@ import Shell from '../components/Shell'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { profile } from '../data/profile'
 import SystemMap from '../components/SystemMap'
+import StatusBar from '../components/StatusBar'
 
 export default function Home() {
   usePageTitle(`${profile.name} — Software Engineer`)
@@ -21,7 +22,7 @@ export default function Home() {
 
         <SystemMap />
 
-        <div className="placeholder">[ live ticker — latest commit · deploy status · local time ]</div>
+        <StatusBar />
       </div>
     </Shell>
   )
