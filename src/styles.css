@@ -138,6 +138,106 @@ p {
   max-width: 560px;
 }
 
+/* ---------- System map ---------- */
+.map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.map-mobile {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+.map-mobile a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  color: var(--ink);
+}
+.map-mobile a:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+}
+.col-label {
+  font: 400 12px var(--mono);
+  letter-spacing: 0.12em;
+  fill: var(--ink-3);
+}
+.node rect {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  transition: fill 0.2s, stroke 0.2s;
+}
+.node.store rect {
+  fill: transparent;
+  stroke: var(--line-strong);
+  stroke-dasharray: 5 4;
+}
+.node .t {
+  font: 600 14px var(--mono);
+  fill: var(--ink);
+}
+.node .s {
+  font: 400 12px var(--mono);
+  fill: var(--ink-3);
+}
+.node.active rect {
+  fill: var(--accent-tint);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.node.store.active rect {
+  fill: transparent;
+  stroke: var(--accent);
+}
+.node-link {
+  cursor: pointer;
+  outline: none;
+}
+.node-link:focus-visible .node rect {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.edge {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke 0.2s;
+}
+.edge.active {
+  stroke: var(--accent);
+}
+.head path {
+  fill: var(--line-strong);
+}
+.head-active path {
+  fill: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .map-svg {
+    display: none;
+  }
+  .map-mobile {
+    display: flex;
+  }
+  .shell {
+    padding: 24px 20px 48px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

@@ -1,9 +1,10 @@
 import Shell from '../components/Shell'
+import SystemMap from '../components/SystemMap'
 
 export default function Home() {
   return (
     <Shell>
-      <div className="placeholder">[ system map ]</div>
+      <SystemMap />
     </Shell>
   )
 }
