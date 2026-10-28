@@ -11,7 +11,9 @@ export default function Home() {
         <section className="stack" style={{ gap: 12 }}>
           <div className="eyebrow">Trainee – Software Engineer</div>
           <h1 className="h-display">{profile.name}</h1>
-          <p className="lede">Full-stack developer building with Java, Spring Boot and React.</p>
+          <p className="lede" style={{ textWrap: 'balance' }}>
+            {profile.headline}
+          </p>
           <p className="muted" style={{ fontSize: 13 }}>
             Click a service to deploy its page.
           </p>
