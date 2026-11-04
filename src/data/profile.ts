@@ -52,14 +52,14 @@ export const profile: Profile = {
     bio: [
       "I'm a full-stack engineer from Sri Lanka who likes owning a problem end to end, from the database schema to the last pixel on screen. I studied Information Systems at the University of Colombo School of Computing, and my approach still follows that: understand how the people, the data and the process fit together before writing any code.",
       'I build Java and Spring Boot services and React interfaces for government agriculture platforms, including certification and registry systems. These are systems with real users, strict workflows and data that has to be right, which has taught me to value clear data models, predictable APIs and interfaces people can use without a manual.',
-      "Away from the keyboard I'm drawn to the night sky and to cricket. I'm a member of the Old Ranabima Astronomical Society and serve on the committee of the Ranabima Royal College Cricket Foundation. Both reward patience and teamwork, which is most of what good engineering needs too.",
+      "Away from the keyboard I'm drawn to the night sky, to cricket and to community work. I'm a member of the Old Ranabima Astronomical Society and the Rotaract Club of Kandy, and serve on the committee of the Ranabima Royal College Cricket Foundation. All three reward patience and teamwork, which is most of what good engineering needs too.",
     ],
     glanceHeading: 'At a glance',
     glance: [
       { label: 'Based in', value: 'Sri Lanka' },
       { label: 'Education', value: 'BSc. in Information Systems, UCSC' },
       { label: 'Focus', value: 'Full-stack development · System design' },
-      { label: 'Outside work', value: 'Astronomy · Cricket' },
+      { label: 'Outside work', value: 'Astronomy · Cricket · Community service' },
     ],
     skillsHeading: 'Skills',
     skills: [
