@@ -14,10 +14,9 @@ export default function About() {
         <section className="stack" style={{ gap: 12 }}>
           <div className="eyebrow">{about.eyebrow}</div>
           <h1 className="h-page">{about.title}</h1>
-          <p className="lede">{about.intro}</p>
-          <div className="cta-row">
-            <Link to={about.introLink.to}>{about.introLink.label}</Link>
-          </div>
+          <p className="lede" style={{ textWrap: 'balance' }}>
+            {about.intro}
+          </p>
         </section>
 
         <div className="about-row">
