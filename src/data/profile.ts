@@ -9,6 +9,7 @@
  *   eyebrow, title, intro   Small label, <h1> and the line under it.
  *   bioHeading, bio         Bio card heading; each string is one paragraph.
  *   skillsHeading, skills   Skills card heading; one row per category, chips in the given order.
+ *   coreStack               Highlighted first row of the Skills card; items also stay in their categories.
  *   links                   Closing links under Skills; `to` must be one of the site's routes.
  */
 
@@ -25,6 +26,7 @@ export type AboutContent = {
   bioHeading: string
   bio: string[]
   skillsHeading: string
+  coreStack: SkillCategory
   skills: SkillCategory[]
   links: ContentLink[]
 }
@@ -51,6 +53,7 @@ export const profile: Profile = {
       "Away from the keyboard I'm drawn to the night sky, to cricket and to community work. I'm a member of the Old Ranabima Astronomical Society and the Rotaract Club of Kandy, and serve on the committee of the Ranabima Royal College Cricket Foundation. All three reward patience and teamwork, which is most of what good engineering needs too.",
     ],
     skillsHeading: 'Skills',
+    coreStack: { name: 'Core stack', items: ['Java', 'Spring Boot', 'React'] },
     skills: [
       { name: 'Languages', items: ['Java', 'JavaScript', 'TypeScript', 'PHP', 'C'] },
       { name: 'Frontend', items: ['React', 'MUI', 'Next.js', 'HTML5', 'CSS3', 'Bootstrap', 'Tailwind CSS'] },

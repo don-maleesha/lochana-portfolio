@@ -309,6 +309,11 @@ ul.chips {
   font-size: 17px;
   line-height: 1.7;
 }
+/* Hairline between the work / approach / personal paragraphs */
+.bio-text p + p {
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
 .skill-row {
   display: grid;
   grid-template-columns: 120px minmax(0, 1fr);
@@ -323,6 +328,11 @@ ul.chips {
 }
 .skill-row:last-child {
   padding-bottom: 0;
+}
+/* Core stack: the first row, chips highlighted with the accent */
+.skill-row.core .chip {
+  border-color: var(--accent);
+  background: var(--accent-tint);
 }
 @media (max-width: 599px) {
   .skill-row {

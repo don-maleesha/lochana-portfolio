@@ -32,8 +32,8 @@ export default function About() {
           <section className="card about-narrow">
             <h2 className="card-title">{about.skillsHeading}</h2>
             <div className="skill-rows">
-              {about.skills.map((group) => (
-                <div key={group.name} className="skill-row">
+              {[about.coreStack, ...about.skills].map((group, i) => (
+                <div key={group.name} className={`skill-row${i === 0 ? ' core' : ''}`}>
                   <span id={groupId(group.name)} className="eyebrow">
                     {group.name}
                   </span>
