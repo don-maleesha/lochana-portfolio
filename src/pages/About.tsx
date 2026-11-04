@@ -20,31 +20,16 @@ export default function About() {
           </div>
         </section>
 
-        <section className="card">
+        <section className="card about-narrow">
           <h2 className="card-title">{about.bioHeading}</h2>
-          <div className="bio-layout">
-            <div className="bio-text">
-              {about.bio.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
-            </div>
-            <aside className="card glance" aria-labelledby="glance-title">
-              <h3 id="glance-title" className="eyebrow">
-                {about.glanceHeading}
-              </h3>
-              <dl>
-                {about.glance.map((item) => (
-                  <div key={item.label}>
-                    <dt>{item.label}</dt>
-                    <dd>{item.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
+          <div className="bio-text">
+            {about.bio.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </div>
         </section>
 
-        <section className="card">
+        <section className="card about-narrow">
           <h2 className="card-title">{about.skillsHeading}</h2>
           <div className="skill-rows">
             {about.skills.map((group) => (
@@ -64,7 +49,7 @@ export default function About() {
           </div>
         </section>
 
-        <div className="cta-row">
+        <div className="cta-row about-narrow">
           {about.links.map((link) => (
             <Link key={link.to} to={link.to}>
               {link.label}

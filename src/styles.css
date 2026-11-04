@@ -281,16 +281,8 @@ ul.chips {
   list-style: none;
 }
 /* ---------- About ---------- */
-.bio-layout {
-  display: grid;
-  gap: 24px;
-  align-items: start;
-}
-@media (min-width: 900px) {
-  .bio-layout {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    gap: 32px;
-  }
+.about-narrow {
+  width: min(100%, 860px);
 }
 .bio-text {
   display: flex;
@@ -298,30 +290,10 @@ ul.chips {
   gap: 16px;
 }
 .bio-text p {
-  max-width: 65ch;
+  max-width: 70ch;
   font-family: var(--sans);
   font-size: 17px;
   line-height: 1.7;
-}
-.glance h3 {
-  font-weight: 400;
-}
-.glance dl {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin: 0;
-}
-.glance dt {
-  font-size: 12px;
-  line-height: 16px;
-  color: var(--ink-3);
-}
-.glance dd {
-  margin: 2px 0 0;
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 22px;
 }
 .skill-row {
   display: grid;

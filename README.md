@@ -37,7 +37,7 @@ doesn't exist fails `npm run build`.
 
 | Content | File |
 |---|---|
-| Name, home headline, the whole About page (intro, bio, at a glance, skills, closing links) | `src/data/profile.ts` (field guide at the top of the file) |
+| Name, home headline, the whole About page (intro, bio, skills, links) | `src/data/profile.ts` (field guide at the top of the file) |
 | Header status line ("open to opportunities") and its on/off switch | `src/data/availability.ts` |
 | Services and data stores on the landing map | `src/data/system.ts` |
 | Projects list and project case studies | `src/data/projects.ts` |
