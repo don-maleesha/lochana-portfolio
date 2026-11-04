@@ -20,34 +20,36 @@ export default function About() {
           </div>
         </section>
 
-        <section className="card about-narrow">
-          <h2 className="card-title">{about.bioHeading}</h2>
-          <div className="bio-text">
-            {about.bio.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-          </div>
-        </section>
+        <div className="about-row">
+          <section className="card about-narrow">
+            <h2 className="card-title">{about.bioHeading}</h2>
+            <div className="bio-text">
+              {about.bio.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          </section>
 
-        <section className="card about-narrow">
-          <h2 className="card-title">{about.skillsHeading}</h2>
-          <div className="skill-rows">
-            {about.skills.map((group) => (
-              <div key={group.name} className="skill-row">
-                <span id={groupId(group.name)} className="eyebrow">
-                  {group.name}
-                </span>
-                <ul className="chips" aria-labelledby={groupId(group.name)}>
-                  {group.items.map((s) => (
-                    <li className="chip" key={s}>
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
+          <section className="card about-narrow">
+            <h2 className="card-title">{about.skillsHeading}</h2>
+            <div className="skill-rows">
+              {about.skills.map((group) => (
+                <div key={group.name} className="skill-row">
+                  <span id={groupId(group.name)} className="eyebrow">
+                    {group.name}
+                  </span>
+                  <ul className="chips" aria-labelledby={groupId(group.name)}>
+                    {group.items.map((s) => (
+                      <li className="chip" key={s}>
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
 
         <div className="cta-row about-narrow">
           {about.links.map((link) => (

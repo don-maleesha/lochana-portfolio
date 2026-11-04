@@ -284,6 +284,19 @@ ul.chips {
 .about-narrow {
   width: min(100%, 860px);
 }
+/* Bio and Skills: stacked at 860px, side by side on wide screens */
+.about-row {
+  display: grid;
+  gap: 32px;
+}
+@media (min-width: 1200px) {
+  .about-row {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+  .about-row > .about-narrow {
+    width: auto;
+  }
+}
 .bio-text {
   display: flex;
   flex-direction: column;
