@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Shell from '../components/Shell'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { profile } from '../data/profile'
@@ -17,18 +18,33 @@ export default function About() {
 
         <section className="card">
           <h2 className="card-title">Bio</h2>
-          <div className="stack" style={{ maxWidth: '70ch', gap: 16 }}>
-            {profile.bio.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
+          <div className="bio-layout">
+            <div className="bio-text">
+              {profile.bio.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+            <aside className="card glance" aria-labelledby="glance-title">
+              <h3 id="glance-title" className="eyebrow">
+                At a glance
+              </h3>
+              <dl>
+                {profile.atAGlance.map((item) => (
+                  <div key={item.label}>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </aside>
           </div>
         </section>
 
         <section className="card">
           <h2 className="card-title">Skills</h2>
-          <div className="skill-groups">
+          <div className="skill-rows">
             {profile.skills.map((group) => (
-              <div key={group.name} className="stack" style={{ gap: 8 }}>
+              <div key={group.name} className="skill-row">
                 <span id={groupId(group.name)} className="eyebrow">
                   {group.name}
                 </span>
@@ -43,6 +59,11 @@ export default function About() {
             ))}
           </div>
         </section>
+
+        <div className="cta-row">
+          <Link to="/projects">View projects →</Link>
+          <Link to="/contact">Get in touch →</Link>
+        </div>
       </div>
     </Shell>
   )
