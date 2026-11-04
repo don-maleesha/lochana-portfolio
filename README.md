@@ -8,7 +8,8 @@ Clicking a service on the landing map "deploys" its page.
 
 - Landing system map, routing and all pages (About, Projects, project case
   study, Experience, Contact) are in place.
-- All copy apart from the current role and degree is placeholder text in
+- Home, header and About copy is final; projects, experience notes and parts
+  of the contact and accessibility pages are still placeholder text in
   `[square brackets]`.
 - The contact form is a demo: it shows a mock response and sends nothing.
 - SPA rewrites are configured for Vercel (`vercel.json`) and Netlify
@@ -27,6 +28,25 @@ Clicking a service on the landing map "deploys" its page.
 - `src/hooks/` — `usePageTitle` (per-route document title and focus).
 - `src/pages/` — one component per route: `Home`, `About`, `Projects`,
   `Project` (`/projects/:slug`), `Experience`, `Contact`, `Accessibility`.
+
+## Editing content
+
+Page copy lives in plain TypeScript files, so most edits never touch a
+component. Typed fields mean a misspelled key or a link to a route that
+doesn't exist fails `npm run build`.
+
+| Content | File |
+|---|---|
+| Name, home headline, the whole About page (intro, bio, at a glance, skills, closing links) | `src/data/profile.ts` (field guide at the top of the file) |
+| Header status line ("open to opportunities") and its on/off switch | `src/data/availability.ts` |
+| Services and data stores on the landing map | `src/data/system.ts` |
+| Projects list and project case studies | `src/data/projects.ts` |
+| Experience page (roles and education as releases) | `src/data/experience.ts` |
+| Search and social preview text (meta description, `og:*`) | `index.html` — keep in sync with the home headline |
+| Contact and Accessibility page copy | `src/pages/Contact.tsx`, `src/pages/Accessibility.tsx` |
+
+Pushing to `main` redeploys the site on Vercel. Run `npm run lint` and
+`npm run build` first; a build error there will also fail the deploy.
 
 # React + TypeScript + Vite
 

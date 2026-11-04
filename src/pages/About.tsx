@@ -3,33 +3,34 @@ import Shell from '../components/Shell'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { profile } from '../data/profile'
 
-const groupId = (name: string) => `skills-${name.toLowerCase()}`
+const about = profile.about
+const groupId = (name: string) => `skills-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
 
 export default function About() {
-  usePageTitle(`About — ${profile.name}`)
+  usePageTitle(`${about.title} — ${profile.name}`)
   return (
     <Shell crumb="about">
       <div className="stack">
         <section className="stack" style={{ gap: 12 }}>
-          <div className="eyebrow">profile.json</div>
-          <h1 className="h-page">About</h1>
-          <p className="lede">{profile.aboutIntro}</p>
+          <div className="eyebrow">{about.eyebrow}</div>
+          <h1 className="h-page">{about.title}</h1>
+          <p className="lede">{about.intro}</p>
         </section>
 
         <section className="card">
-          <h2 className="card-title">Bio</h2>
+          <h2 className="card-title">{about.bioHeading}</h2>
           <div className="bio-layout">
             <div className="bio-text">
-              {profile.bio.map((p) => (
+              {about.bio.map((p) => (
                 <p key={p}>{p}</p>
               ))}
             </div>
             <aside className="card glance" aria-labelledby="glance-title">
               <h3 id="glance-title" className="eyebrow">
-                At a glance
+                {about.glanceHeading}
               </h3>
               <dl>
-                {profile.atAGlance.map((item) => (
+                {about.glance.map((item) => (
                   <div key={item.label}>
                     <dt>{item.label}</dt>
                     <dd>{item.value}</dd>
@@ -41,9 +42,9 @@ export default function About() {
         </section>
 
         <section className="card">
-          <h2 className="card-title">Skills</h2>
+          <h2 className="card-title">{about.skillsHeading}</h2>
           <div className="skill-rows">
-            {profile.skills.map((group) => (
+            {about.skills.map((group) => (
               <div key={group.name} className="skill-row">
                 <span id={groupId(group.name)} className="eyebrow">
                   {group.name}
@@ -61,8 +62,11 @@ export default function About() {
         </section>
 
         <div className="cta-row">
-          <Link to="/projects">View projects →</Link>
-          <Link to="/contact">Get in touch →</Link>
+          {about.links.map((link) => (
+            <Link key={link.to} to={link.to}>
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
     </Shell>
