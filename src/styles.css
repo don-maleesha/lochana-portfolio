@@ -329,11 +329,6 @@ ul.chips {
 .skill-row:last-child {
   padding-bottom: 0;
 }
-/* Core stack: the first row, chips highlighted with the accent */
-.skill-row.core .chip {
-  border-color: var(--accent);
-  background: var(--accent-tint);
-}
 @media (max-width: 599px) {
   .skill-row {
     grid-template-columns: minmax(0, 1fr);
