@@ -15,7 +15,13 @@ export default function About() {
           <div className="eyebrow">{about.eyebrow}</div>
           <h1 className="h-page">{about.title}</h1>
           <p className="lede" style={{ textWrap: 'balance' }}>
-            {about.intro}
+            {about.intro.map((line, i) => (
+              <span key={line} className="intro-line">
+                {/* Read as one sentence by screen readers */}
+                {i > 0 && <span className="sr-only">, </span>}
+                {line}
+              </span>
+            ))}
           </p>
         </section>
 
