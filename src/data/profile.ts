@@ -7,6 +7,7 @@
  *             Keep the meta/og descriptions in index.html in sync with it.
  * about       Everything on /about. Must not mention a job title or employer.
  *   eyebrow, title, intro   Small label, <h1> and the line under it.
+ *   introLink               Link shown right under the intro, so contact is reachable without scrolling.
  *   bioHeading, bio         Bio card heading; each string is one paragraph.
  *   glanceHeading, glance   "At a glance" panel heading and its label/value rows.
  *   skillsHeading, skills   Skills card heading; one row per category, chips in the given order.
@@ -24,6 +25,7 @@ export type AboutContent = {
   eyebrow: string
   title: string
   intro: string
+  introLink: ContentLink
   bioHeading: string
   bio: string[]
   glanceHeading: string
@@ -48,6 +50,7 @@ export const profile: Profile = {
     eyebrow: 'profile.json',
     title: 'About',
     intro: 'BSc. in Information Systems, University of Colombo School of Computing',
+    introLink: { label: 'Get in touch →', to: '/contact' },
     bioHeading: 'Bio',
     bio: [
       "I'm a full-stack engineer from Sri Lanka who likes owning a problem end to end, from the database schema to the last pixel on screen. I studied Information Systems at the University of Colombo School of Computing, and my approach still follows that: understand how the people, the data and the process fit together before writing any code.",

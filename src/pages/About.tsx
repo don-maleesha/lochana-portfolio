@@ -15,6 +15,9 @@ export default function About() {
           <div className="eyebrow">{about.eyebrow}</div>
           <h1 className="h-page">{about.title}</h1>
           <p className="lede">{about.intro}</p>
+          <div className="cta-row">
+            <Link to={about.introLink.to}>{about.introLink.label}</Link>
+          </div>
         </section>
 
         <section className="card">
