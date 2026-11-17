@@ -15,7 +15,7 @@ export default function Project() {
   // Track which project went live so prev/next navigation replays the deploy
   const [liveSlug, setLiveSlug] = useState<string | null>(null)
   const reduceMotion = useReducedMotion()
-  usePageTitle(`${project ? project.name : 'Project not found'} — ${profile.name}`)
+  usePageTitle(`${project ? project.title : 'Project not found'} — ${profile.name}`)
 
   if (!project) {
     return (
@@ -41,7 +41,7 @@ export default function Project() {
         <BuildLog key={project.slug} target={`projects/${project.slug}`} onDone={() => setLiveSlug(project.slug)} />
 
         {/* Keep exactly one h1 on the page while the deploy log runs */}
-        {!live && <h1 className="sr-only">{project.name}</h1>}
+        {!live && <h1 className="sr-only">{project.title}</h1>}
 
         {live && (
           <motion.div
@@ -51,13 +51,11 @@ export default function Project() {
             transition={{ duration: 0.35 }}
           >
             <section className="stack" style={{ gap: 16 }}>
-              <h1 className="h-page">{project.name}</h1>
+              <h1 className="h-page">{project.title}</h1>
+              <p className="project-meta">
+                {project.context} · {project.year}
+              </p>
               <p className="lede">{project.summary}</p>
-              <ul className="chips" aria-label="Project details">
-                <li className="chip">{project.kind}</li>
-                <li className="chip">{project.team}</li>
-                <li className="chip">{project.year}</li>
-              </ul>
               <ul className="chips" aria-label="Stack">
                 {project.stack.map((s) => (
                   <li className="chip" key={s}>

@@ -3,11 +3,14 @@
  * Keep [square brackets] for anything not yet confirmed; never invent results or numbers.
  *
  * slug         URL segment; also referenced from experience.ts.
- * name         Project name (page <h1>).
- * summary      One line for the list and under the heading.
- * kind, team   Short labels shown as chips, e.g. 'Learning project', 'Team of 4'.
+ * title        Project name (card title and case-study <h1>).
  * year         Year or range.
- * stack        Main technologies, shown as chips.
+ * featured     true for the one project shown large at the top of /projects.
+ * context      Meta line, e.g. 'Team of 2 · Learning project'.
+ * summary      One sentence on what was built and by whom, max ~120 characters (clamped to 2 lines).
+ * stack        Full stack, shown on the case-study page.
+ * keyStack     3–4 key technologies for the card (only the first 4 are shown).
+ * thumbnail    Optional screenshot path (e.g. '/projects/cakeshop.png' in public/); cards show initials without it.
  * description  "What it does": one paragraph.
  * built        "What I built": your own part, one bullet per string.
  * learned      "What I learned": one bullet per string.
@@ -28,12 +31,14 @@ export type ExternalLink = { label: string; href: `https://${string}` }
 
 export type ProjectEntry = {
   slug: string
-  name: string
-  summary: string
-  kind: string
-  team: string
+  title: string
   year: string
+  featured: boolean
+  context: string
+  summary: string
   stack: string[]
+  keyStack: string[]
+  thumbnail?: string
   description: string
   built: string[]
   learned: string[]
@@ -41,18 +46,28 @@ export type ProjectEntry = {
   links: ExternalLink[]
 }
 
-/** "More on GitHub" link under the project list */
-export const githubProfile: ExternalLink = { label: 'More on GitHub →', href: 'https://github.com/don-maleesha' }
+/** Copy for the /projects page itself */
+export const projectsPage = {
+  eyebrow: 'GET /projects',
+  title: 'Projects',
+  intro: "Things I've built outside work, from team builds to solo experiments.",
+  featuredHeading: 'Featured',
+  moreHeading: 'More projects',
+  cardCta: 'deploy case study',
+  experience: { text: 'Looking for production work?', label: '→ view experience', to: '/experience' },
+  github: { label: 'More on GitHub →', href: 'https://github.com/don-maleesha' } as ExternalLink,
+}
 
 export const projects: ProjectEntry[] = [
   {
     slug: 'cakeshop',
-    name: 'CakeShop',
-    summary: 'E-commerce web app for a cake shop: browse, customise and order cakes, with an admin side for products, orders and sales.',
-    kind: 'Learning project',
-    team: 'Team of 2',
+    title: 'CakeShop',
     year: '2025',
+    featured: true,
+    context: 'Team of 2 · Learning project',
+    summary: 'Cake shop e-commerce app with cart, custom orders, PayHere checkout and an admin dashboard, built with a teammate.',
     stack: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Axios', 'PayHere'],
+    keyStack: ['React', 'Tailwind CSS', 'PayHere'],
     description:
       'Customers browse cakes by category with search and filters, add them to a cart or wishlist, request custom cakes and track their orders, paying by cash on delivery or through PayHere with zone-based delivery fees. An admin side manages products, categories, orders, custom requests, reviews and customer messages, with a sales and order analytics dashboard.',
     built: ['[Your part, built with one teammate: which screens, flows or integrations]', '[Back end: did you build the API? Link its repo if public]'],
@@ -81,12 +96,13 @@ export const projects: ProjectEntry[] = [
   },
   {
     slug: 'ceylon-cuisine',
-    name: 'Ceylon Cuisine',
-    summary: 'Recipe-sharing web app for authentic Sri Lankan dishes, with member submissions, admin moderation, ratings and favourites.',
-    kind: 'Learning project',
-    team: 'Solo',
+    title: 'Ceylon Cuisine',
     year: '2024–2025',
+    featured: false,
+    context: 'Solo · Learning project',
+    summary: 'Solo-built recipe-sharing app for Sri Lankan dishes, with member submissions, admin moderation and ratings.',
     stack: ['PHP', 'MySQL', 'JavaScript', 'AJAX', 'CSS'],
+    keyStack: ['PHP', 'MySQL', 'JavaScript'],
     description:
       'Guests browse and search recipes; registered members submit their own with ingredients, steps and photos, rate recipes and keep favourites. Submissions go through an admin approval workflow, and an admin dashboard covers user management, recipe moderation and platform statistics. Accounts use hashed passwords and role-based access for admins and members.',
     built: ['Designed and built the whole application on my own: [which parts to highlight]'],
@@ -113,12 +129,13 @@ export const projects: ProjectEntry[] = [
   },
   {
     slug: 'relaxu',
-    name: 'RelaxU',
-    summary: 'Stress monitoring and workload management web app for university students, built by a team of four without frameworks.',
-    kind: 'University group project',
-    team: 'Team of 4',
+    title: 'RelaxU',
     year: '2024–2025',
+    featured: false,
+    context: 'Team of 4 · University project',
+    summary: 'Stress-monitoring and workload app for university students, built by a team of four on a custom PHP MVC.',
     stack: ['PHP', 'JavaScript', 'HTML', 'CSS', 'MySQL', 'PHPMailer'],
+    keyStack: ['PHP', 'JavaScript', 'MySQL'],
     description:
       'RelaxU helps university students notice stress early and keep their workload under control. It combines self-assessment surveys and typing-behaviour analysis for stress insights with mindfulness, guided meditation and breathing exercises, and recommends counselling at high stress levels. Coursework organisers, reminders and priority-based planning sit alongside discussion forums, peer support groups, articles and videos, and session booking with counsellors and academic advisors. It is built on a custom MVC architecture in plain PHP and JavaScript, with no frameworks.',
     built: ['[Your part in the team of four]'],
