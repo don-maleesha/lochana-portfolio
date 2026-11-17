@@ -71,7 +71,7 @@ export const projects: ProjectEntry[] = [
     stack: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Axios', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Nodemailer', 'PayHere'],
     keyStack: ['React', 'Tailwind CSS', 'PayHere'],
     thumbnail: '/projects/cakeshop.webp',
-    thumbnailAlt: 'CakeShop product page for a chocolate mousse cake, with size options priced in LKR, stock status and an Add to Cart button',
+    thumbnailAlt: 'CakeShop home page with the headline Delicious Cakes Made Fresh Daily, Shop Now and Custom Orders buttons, and a photo of a fruit-topped cake',
     description:
       'Customers browse cakes by category with search and filters, add them to a cart or wishlist, request custom cakes and track their orders, paying by cash on delivery or through PayHere with zone-based delivery fees. An admin side manages products, categories, orders, custom requests, reviews and customer messages, with a sales and order analytics dashboard.',
     built: [
@@ -120,7 +120,7 @@ export const projects: ProjectEntry[] = [
     stack: ['PHP', 'MySQL', 'JavaScript', 'AJAX', 'CSS'],
     keyStack: ['PHP', 'MySQL', 'JavaScript'],
     thumbnail: '/projects/ceylon-cuisine.webp',
-    thumbnailAlt: 'Ceylon Cuisine recipe cards for Watalappan, Achcharu and Asmi, each with a photo, description, star rating and View Recipe button',
+    thumbnailAlt: 'Ceylon Cuisine home page welcoming visitors, with Explore and Submit buttons and a photo of a Sri Lankan rice and curry meal',
     description:
       'Guests browse and search recipes; registered members submit their own with ingredients, steps and photos, rate recipes and keep favourites. Submissions go through an admin approval workflow, and an admin dashboard covers user management, recipe moderation and platform statistics. Accounts use hashed passwords and role-based access for admins and members.',
     built: [
@@ -159,9 +159,16 @@ export const projects: ProjectEntry[] = [
     summary: 'Stress-monitoring and workload app for university students, built by a team of four on a custom PHP MVC.',
     stack: ['PHP', 'JavaScript', 'HTML', 'CSS', 'MySQL', 'PHPMailer'],
     keyStack: ['PHP', 'JavaScript', 'MySQL'],
+    thumbnail: '/projects/relaxu.webp',
+    thumbnailAlt: 'RelaxU home page with the headline Healthy Minds, Happy Lives, Student Mental Health Consultancy, a Get started button and a photo of a student studying',
     description:
       'RelaxU helps university students notice stress early and keep their workload under control. It combines self-assessment surveys and typing-behaviour analysis for stress insights with mindfulness, guided meditation and breathing exercises, and recommends counselling at high stress levels. Coursework organisers, reminders and priority-based planning sit alongside discussion forums, peer support groups, articles and videos, and session booking with counsellors and academic advisors. It is built on a custom MVC architecture in plain PHP and JavaScript, with no frameworks.',
-    built: ['[Your part in the team of four]'],
+    built: [
+      'Built the relaxation activities module, my part of the team of four',
+      'Built the student-facing activity cards, with descriptions and links to guided videos and playlists',
+      'Built the admin portal to add, edit and delete activities, across the controller, model and views',
+      'Grouped activities by stress level (low, moderate, high) for the stress-level suggester',
+    ],
     learned: ['[What you learned]', '[What you learned]'],
     diagram: {
       columns: [
