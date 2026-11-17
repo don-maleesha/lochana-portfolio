@@ -1,9 +1,15 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import type { MouseEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import type { ProjectEntry } from '../data/projects'
 import { projectsPage } from '../data/projects'
 
+const FEEDBACK_MS = 250
+
 // "CakeShop" -> "CS", "Ceylon Cuisine" -> "CC", "RelaxU" -> "RU"
 const initials = (title: string) => (title.match(/[A-Z]/g)?.join('') || title).slice(0, 2).toUpperCase()
+
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /**
  * One project on /projects. The title link is stretched over the whole card (see .project-card CSS),
@@ -11,6 +17,23 @@ const initials = (title: string) => (title.match(/[A-Z]/g)?.join('') || title).s
  */
 export default function ProjectCard({ project, featured = false }: { project: ProjectEntry; featured?: boolean }) {
   const titleId = `project-${project.slug}`
+  const to = `/projects/${project.slug}`
+  const navigate = useNavigate()
+  const [deploying, setDeploying] = useState(false)
+  const timer = useRef<number | undefined>(undefined)
+
+  useEffect(() => () => window.clearTimeout(timer.current), [])
+
+  // Plain left click: show "deploying…" briefly, then navigate. Modified clicks (new tab/window)
+  // and reduced motion fall through to the link's normal behaviour with no delay.
+  function onClick(e: MouseEvent<HTMLAnchorElement>) {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || prefersReducedMotion()) return
+    e.preventDefault()
+    if (deploying) return
+    setDeploying(true)
+    timer.current = window.setTimeout(() => navigate(to), FEEDBACK_MS)
+  }
+
   return (
     <article className={`card project-card${featured ? ' featured' : ''}`} aria-labelledby={titleId}>
       <div className="project-thumb">
@@ -32,7 +55,9 @@ export default function ProjectCard({ project, featured = false }: { project: Pr
       <div className="project-body">
         <div className="project-head">
           <h3 id={titleId} className="project-title">
-            <Link to={`/projects/${project.slug}`}>{project.title}</Link>
+            <Link to={to} onClick={onClick}>
+              {project.title}
+            </Link>
           </h3>
           <span className="project-year">{project.year}</span>
         </div>
@@ -45,8 +70,14 @@ export default function ProjectCard({ project, featured = false }: { project: Pr
             </li>
           ))}
         </ul>
-        <span className="project-cta" aria-hidden="true">
-          <span className="project-cta-arrow">→</span> {projectsPage.cardCta}
+        <span className={`project-cta${deploying ? ' deploying' : ''}`} aria-hidden="true">
+          {deploying ? (
+            projectsPage.cardCtaBusy
+          ) : (
+            <>
+              <span className="project-cta-arrow">→</span> {projectsPage.cardCta}
+            </>
+          )}
         </span>
       </div>
     </article>

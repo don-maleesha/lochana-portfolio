@@ -409,7 +409,8 @@ ul.chips {
   color: var(--ink-2);
 }
 .project-card:hover .project-cta,
-.project-card:has(a:focus-visible) .project-cta {
+.project-card:has(a:focus-visible) .project-cta,
+.project-cta.deploying {
   color: var(--accent);
 }
 .project-cta-arrow {
@@ -616,19 +617,6 @@ ul.chips {
   gap: 8px;
   min-height: 188px;
 }
-.progress {
-  height: 8px;
-  background: var(--line);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 8px;
-}
-.progress > div {
-  height: 100%;
-  background: var(--accent);
-  transition: width 0.28s linear;
-}
-
 /* ---------- System map ---------- */
 .map-svg {
   display: block;

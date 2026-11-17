@@ -56,6 +56,10 @@ export const projectsPage = {
   featuredHeading: 'Featured',
   moreHeading: 'More projects',
   cardCta: 'deploy case study',
+  /** Shown on the clicked card for ~250ms before navigating */
+  cardCtaBusy: 'deploying…',
+  /** Case-study top bar status: '● live · <year>' */
+  caseStatus: 'live',
   experience: { text: 'Looking for production work?', label: '→ view experience', to: '/experience' },
   github: { label: 'More on GitHub →', href: 'https://github.com/don-maleesha' } as ExternalLink,
 }
