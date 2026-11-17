@@ -119,9 +119,16 @@ export const projects: ProjectEntry[] = [
     summary: 'Solo-built recipe-sharing app for Sri Lankan dishes, with member submissions, admin moderation and ratings.',
     stack: ['PHP', 'MySQL', 'JavaScript', 'AJAX', 'CSS'],
     keyStack: ['PHP', 'MySQL', 'JavaScript'],
+    thumbnail: '/projects/ceylon-cuisine.webp',
+    thumbnailAlt: 'Ceylon Cuisine recipe cards for Watalappan, Achcharu and Asmi, each with a photo, description, star rating and View Recipe button',
     description:
       'Guests browse and search recipes; registered members submit their own with ingredients, steps and photos, rate recipes and keep favourites. Submissions go through an admin approval workflow, and an admin dashboard covers user management, recipe moderation and platform statistics. Accounts use hashed passwords and role-based access for admins and members.',
-    built: ['Designed and built the whole application on my own: [which parts to highlight]'],
+    built: [
+      'Designed and built the whole application on my own: PHP pages and AJAX endpoints, the MySQL schema and the front end',
+      'Built sign-up and sign-in with hashed passwords, and role-based access for members and admins',
+      'Built recipe submission with image uploads and an admin approval workflow',
+      'Added ratings, favourites, category filters, search and sorting, and an admin dashboard with platform statistics',
+    ],
     learned: ['[What you learned]', '[What you learned]'],
     diagram: {
       columns: [
