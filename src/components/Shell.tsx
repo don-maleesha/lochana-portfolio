@@ -4,17 +4,27 @@ import DeployStrip from './DeployStrip'
 import { availability } from '../data/availability'
 import { profile } from '../data/profile'
 
-export default function Shell({ crumb, children }: { crumb?: string; children: ReactNode }) {
+/** A breadcrumb step after "← map"; give `to` for every step except the current page. */
+export type Crumb = { label: string; to?: string }
+
+export default function Shell({ crumb, children }: { crumb?: string | Crumb[]; children: ReactNode }) {
+  const trail: Crumb[] = typeof crumb === 'string' ? [{ label: crumb }] : (crumb ?? [])
   return (
     <div className="shell">
       <a href="#main" className="skip-link">
         Skip to content
       </a>
       <header className="topbar">
-        {crumb ? (
-          <div>
-            <Link to="/">← map</Link> / {crumb}
-          </div>
+        {trail.length > 0 ? (
+          <nav aria-label="Breadcrumb" className="crumbs">
+            <Link to="/">← map</Link>
+            {trail.map((c, i) => (
+              <span key={c.label}>
+                <span aria-hidden="true"> / </span>
+                {c.to && i < trail.length - 1 ? <Link to={c.to}>{c.label}</Link> : <span aria-current="page">{c.label}</span>}
+              </span>
+            ))}
+          </nav>
         ) : (
           <Link to="/" className="wordmark">
             <span className="wordmark-full">{profile.name}</span>

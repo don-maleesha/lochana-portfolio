@@ -19,7 +19,7 @@ export default function Project() {
 
   if (!project) {
     return (
-      <Shell crumb="projects / not found">
+      <Shell crumb={[{ label: 'projects', to: '/projects' }, { label: 'not found' }]}>
         <div className="stack" style={{ gap: 12 }}>
           <h1 className="h-page">Project not found</h1>
           <p className="lede">
@@ -35,7 +35,7 @@ export default function Project() {
   const next = projects[index + 1]
 
   return (
-    <Shell crumb={`projects / ${project.slug}`}>
+    <Shell crumb={[{ label: 'projects', to: '/projects' }, { label: project.slug }]}>
       <div className="stack">
         {/* key forces the deploy log to replay when switching projects */}
         <BuildLog key={project.slug} target={`projects/${project.slug}`} onDone={() => setLiveSlug(project.slug)} />
