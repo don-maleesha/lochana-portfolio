@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import Shell from '../components/Shell'
 import BuildLog from '../components/BuildLog'
+import ProjectDiagram from '../components/ProjectDiagram'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { profile } from '../data/profile'
 import { projects } from '../data/projects'
@@ -49,39 +50,62 @@ export default function Project() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
           >
+            <section className="stack" style={{ gap: 16 }}>
+              <h1 className="h-page">{project.name}</h1>
+              <p className="lede">{project.summary}</p>
+              <ul className="chips" aria-label="Project details">
+                <li className="chip">{project.kind}</li>
+                <li className="chip">{project.team}</li>
+                <li className="chip">{project.year}</li>
+              </ul>
+              <ul className="chips" aria-label="Stack">
+                {project.stack.map((s) => (
+                  <li className="chip" key={s}>
+                    {s}
+                  </li>
+                ))}
+              </ul>
+              {project.links.length > 0 && (
+                <div className="cta-row">
+                  {project.links.map((l) => (
+                    <a key={l.href} href={l.href}>
+                      {l.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            <section className="card">
+              <h2 className="card-title">What it does</h2>
+              <div className="bio-text">
+                <p>{project.description}</p>
+              </div>
+            </section>
+
+            <section className="card">
+              <h2 className="card-title">How it fits together</h2>
+              <ProjectDiagram diagram={project.diagram} />
+            </section>
+
             <div className="row-wrap">
-              <div className="col stack" style={{ gap: 16 }}>
-                <h1 className="h-page">{project.name}</h1>
-                <p className="lede">{project.summary}</p>
-                <div className="chips">
-                  <span className="chip">role: {project.role}</span>
-                  <span className="chip">stack: {project.stack.join(', ')}</span>
-                  <span className="chip">year: {project.year}</span>
-                </div>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <span className="btn primary">View live</span>
-                  <span className="btn">Source</span>
-                </div>
-              </div>
-              <div className="col placeholder" style={{ minHeight: 240 }}>
-                [ screenshot / demo ]
-              </div>
+              <section className="card col">
+                <h2 className="card-title">What I built</h2>
+                <ul className="content-list">
+                  {project.built.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              </section>
+              <section className="card col">
+                <h2 className="card-title">What I learned</h2>
+                <ul className="content-list">
+                  {project.learned.map((l, i) => (
+                    <li key={i}>{l}</li>
+                  ))}
+                </ul>
+              </section>
             </div>
-
-            <div className="row-wrap" style={{ gap: 24 }}>
-              {[
-                ['Problem', project.problem],
-                ['Approach', project.approach],
-                ['Outcome', project.outcome],
-              ].map(([title, body]) => (
-                <div className="card col" style={{ flexBasis: 260 }} key={title}>
-                  <h2 className="card-title">{title}</h2>
-                  <p className="muted">{body}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="placeholder">[ mini architecture diagram of this project — same visual language as the landing map ]</div>
 
             <nav className="page-nav" aria-label="Project navigation" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16, paddingTop: 24, borderTop: '1px solid var(--line)', fontSize: 13 }}>
               {prev ? <Link to={`/projects/${prev.slug}`}>← previous project</Link> : <span />}

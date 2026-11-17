@@ -23,7 +23,7 @@ export const releases: Release[] = [
       '[Something you improved or learned]',
     ],
     stack: ['Java', 'Spring Boot', 'React', 'MUI'],
-    projects: ['project-01', 'project-02'],
+    projects: [],
   },
   {
     id: 'v1',
@@ -33,6 +33,6 @@ export const releases: Release[] = [
     period: 'Graduated',
     notes: ['[Focus areas, final-year project or achievements]'],
     stack: [],
-    projects: [],
+    projects: ['relaxu'],
   },
 ]
