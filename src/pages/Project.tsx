@@ -74,6 +74,17 @@ export default function Project() {
               )}
             </section>
 
+            {project.thumbnail && (
+              <figure className="project-shot">
+                <img
+                  src={project.thumbnail}
+                  alt={project.thumbnailAlt ?? `Screenshot of ${project.title}`}
+                  width={1200}
+                  height={675}
+                />
+              </figure>
+            )}
+
             <section className="card">
               <h2 className="card-title">What it does</h2>
               <div className="bio-text">

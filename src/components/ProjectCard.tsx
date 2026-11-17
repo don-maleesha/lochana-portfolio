@@ -15,7 +15,13 @@ export default function ProjectCard({ project, featured = false }: { project: Pr
     <article className={`card project-card${featured ? ' featured' : ''}`} aria-labelledby={titleId}>
       <div className="project-thumb">
         {project.thumbnail ? (
-          <img src={project.thumbnail} alt={`Screenshot of ${project.title}`} loading="lazy" />
+          <img
+            src={project.thumbnail}
+            alt={project.thumbnailAlt ?? `Screenshot of ${project.title}`}
+            width={1200}
+            height={675}
+            loading="lazy"
+          />
         ) : (
           <span className="project-thumb-initials" aria-hidden="true">
             {initials(project.title)}

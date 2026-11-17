@@ -349,6 +349,18 @@ ul.chips {
 .project-card.featured .project-thumb-initials {
   font-size: 48px;
 }
+.project-shot {
+  max-width: 960px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.project-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .project-body {
   display: flex;
   flex-direction: column;
