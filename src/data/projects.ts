@@ -50,12 +50,12 @@ export const projects: ProjectEntry[] = [
     name: 'CakeShop',
     summary: 'E-commerce web app for a cake shop: browse, customise and order cakes, with an admin side for products, orders and sales.',
     kind: 'Learning project',
-    team: '[solo / team]',
+    team: 'Team of 2',
     year: '2025',
     stack: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Axios', 'PayHere'],
     description:
       'Customers browse cakes by category with search and filters, add them to a cart or wishlist, request custom cakes and track their orders, paying by cash on delivery or through PayHere with zone-based delivery fees. An admin side manages products, categories, orders, custom requests, reviews and customer messages, with a sales and order analytics dashboard.',
-    built: ['[Your part: which screens, flows or integrations you built]', '[Back end: did you build the API? Link its repo if public]'],
+    built: ['[Your part, built with one teammate: which screens, flows or integrations]', '[Back end: did you build the API? Link its repo if public]'],
     learned: ['[What you learned]', '[What you learned]'],
     diagram: {
       columns: [
@@ -84,12 +84,12 @@ export const projects: ProjectEntry[] = [
     name: 'Ceylon Cuisine',
     summary: 'Recipe-sharing web app for authentic Sri Lankan dishes, with member submissions, admin moderation, ratings and favourites.',
     kind: 'Learning project',
-    team: '[solo / team]',
+    team: 'Solo',
     year: '2024–2025',
     stack: ['PHP', 'MySQL', 'JavaScript', 'AJAX', 'CSS'],
     description:
       'Guests browse and search recipes; registered members submit their own with ingredients, steps and photos, rate recipes and keep favourites. Submissions go through an admin approval workflow, and an admin dashboard covers user management, recipe moderation and platform statistics. Accounts use hashed passwords and role-based access for admins and members.',
-    built: ['[Your part: which features you built]'],
+    built: ['Designed and built the whole application on my own: [which parts to highlight]'],
     learned: ['[What you learned]', '[What you learned]'],
     diagram: {
       columns: [
