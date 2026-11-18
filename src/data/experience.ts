@@ -35,4 +35,14 @@ export const releases: Release[] = [
     stack: [],
     projects: ['relaxu'],
   },
+  {
+    id: 'v0',
+    tag: 'v0.1',
+    title: 'G.C.E. Advanced Level, Physical Science',
+    org: 'Ranabima Royal College',
+    period: '2020',
+    notes: ['[Subjects, results or achievements]'],
+    stack: [],
+    projects: [],
+  },
 ]
