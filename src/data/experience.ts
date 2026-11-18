@@ -47,7 +47,7 @@ export const releases: Release[] = [
     current: true,
     title: 'Trainee – Software Engineer',
     org: 'Ones and Zeros Pvt Ltd',
-    period: '[start date] – present',
+    period: 'Nov 2025 – present',
     summary: 'Full-stack development on government agriculture systems for Sri Lanka and Vanuatu.',
     projects: [
       {
