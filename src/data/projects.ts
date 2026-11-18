@@ -111,7 +111,7 @@ export const projects: ProjectEntry[] = [
     thumbnailAlt: 'CakeShop home page with the headline Delicious Cakes Made Fresh Daily, Shop Now and Custom Orders buttons, and a photo of a fruit-topped cake',
     role: 'Full-stack developer',
     team: '2 people',
-    duration: 'Jun–Dec 2025', // from the repo's commit history
+    duration: '2025',
     links: { github: 'https://github.com/don-maleesha/CakeShop' },
     stackGroups: [
       { label: 'Frontend', items: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Axios'] },
@@ -224,7 +224,7 @@ export const projects: ProjectEntry[] = [
     thumbnailAlt: 'Ceylon Cuisine home page welcoming visitors, with Explore and Submit buttons and a photo of a Sri Lankan rice and curry meal',
     role: 'Solo developer',
     team: 'Solo',
-    duration: 'May 2024 – Jul 2025', // repo created / last updated
+    duration: '2024–2025',
     links: { github: 'https://github.com/don-maleesha/ceylon-cuisine' },
     stackGroups: [
       { label: 'Frontend', items: ['JavaScript', 'AJAX', 'CSS'] },
@@ -324,7 +324,7 @@ export const projects: ProjectEntry[] = [
     thumbnailAlt: 'RelaxU home page with the headline Healthy Minds, Happy Lives, Student Mental Health Consultancy, a Get started button and a photo of a student studying',
     role: 'Developer, relaxation activities module',
     team: '4 people',
-    duration: 'Sep 2024 – May 2025', // team repo created / last updated
+    duration: '2024–2025',
     links: { github: 'https://github.com/ovindumandith/GroupProject-IS2102' },
     stackGroups: [
       { label: 'Frontend', items: ['HTML', 'CSS', 'JavaScript'] },
