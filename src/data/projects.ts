@@ -227,7 +227,7 @@ export const projects: ProjectEntry[] = [
     duration: '2024–2025',
     links: { github: 'https://github.com/don-maleesha/ceylon-cuisine' },
     stackGroups: [
-      { label: 'Frontend', items: ['JavaScript', 'AJAX', 'CSS'] },
+      { label: 'Frontend', items: ['HTML', 'CSS', 'JavaScript', 'AJAX'] },
       { label: 'Backend', items: ['PHP'] },
       { label: 'Data', items: ['MySQL'] },
     ],
