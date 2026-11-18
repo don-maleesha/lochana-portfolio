@@ -109,7 +109,7 @@ export const projects: ProjectEntry[] = [
     keyStack: ['React', 'Tailwind CSS', 'PayHere'],
     thumbnail: '/projects/cakeshop.webp',
     thumbnailAlt: 'CakeShop home page with the headline Delicious Cakes Made Fresh Daily, Shop Now and Custom Orders buttons, and a photo of a fruit-topped cake',
-    role: '[TODO: your role, e.g. Full-stack developer]',
+    role: 'Full-stack developer',
     team: '2 people',
     duration: 'Jun–Dec 2025', // from the repo's commit history
     links: { github: 'https://github.com/don-maleesha/CakeShop' },
@@ -122,7 +122,7 @@ export const projects: ProjectEntry[] = [
       { label: 'Email', items: ['Nodemailer'] },
     ],
     overview:
-      '[TODO: the problem in one sentence: who needed this and why.] Customers browse cakes by category with search and filters, add them to a cart or wishlist, request custom cakes and track their orders, paying by cash on delivery or through PayHere. An admin side manages products, orders, custom requests and reviews, with a sales and order analytics dashboard.',
+      'An online store for a cake boutique that sells ready-made cakes and takes made-to-order custom cakes, with delivery across several districts. Customers browse by category with search and filters, add cakes to a cart or wishlist, request custom cakes and track their orders, paying by cash on delivery or through PayHere. An admin side manages products, orders, custom requests and reviews, with an analytics dashboard.',
     myRole: [
       'Set up the React and Vite client, and built registration, login and role-based access for customers and admins',
       'Built the home and cakes pages, the cart and checkout, and the PayHere payment integration',
@@ -130,12 +130,24 @@ export const projects: ProjectEntry[] = [
       'Added My Orders with a unified order ID, reviews and ratings, and a wishlist, with their Express endpoints',
     ],
     features: [
-      { title: 'Cart and checkout', text: '[TODO: what the customer can do and what makes it work well]' },
-      { title: 'Custom cake orders', text: '[TODO: how a customer requests a custom cake and how admins handle it]' },
-      { title: 'Admin analytics', text: '[TODO: what the dashboard shows and who uses it]' },
-      { title: 'Reviews and wishlist', text: '[TODO: how customers review and save cakes]' },
+      {
+        title: 'Cart and checkout',
+        text: 'Customers choose a size and quantity, and the cart is saved per user, so it survives reloads and switching accounts. Checkout adds a delivery fee by district (Colombo, Gampaha, Kalutara, Kandy and other areas) and takes cash on delivery or PayHere.',
+      },
+      {
+        title: 'Custom cake orders',
+        text: 'Customers request a made-to-order cake through a form. Admins review each request and move it through pending, confirmed, in progress and completed, with its own payment status.',
+      },
+      {
+        title: 'Admin analytics',
+        text: 'Bar, line and pie charts cover order status, orders by day of week, event type and location, delivery zones, guest versus registered customers, custom orders and low-stock alerts.',
+      },
+      {
+        title: 'Reviews and wishlist',
+        text: 'Customers rate and review cakes and can edit or delete their own reviews, which admins moderate. Signed-in customers can save cakes to a wishlist.',
+      },
     ],
-    // screens[0] is the hero. TODO: add more screenshots (1200×675 WebP in public/projects/) to fill "Screens".
+    // screens[0] is the hero; add more screenshots (1200×675 WebP in public/projects/) to fill "Screens".
     screens: [
       {
         src: '/projects/cakeshop.webp',
@@ -143,9 +155,18 @@ export const projects: ProjectEntry[] = [
       },
     ],
     decisions: [
-      { title: 'Separate React client and Express API', text: '[TODO: why the front end and API are split, and what that made easier]' },
-      { title: 'PayHere checkout signed by the API', text: '[TODO: why the payment hash is generated on the server, not in the browser]' },
-      { title: 'A business-logic layer in the API', text: '[TODO: why order rules and workflows live in their own layer]' },
+      {
+        title: 'Separate React client and Express API',
+        text: 'The React app and the Express API are separate projects that talk over HTTP. One API serves both the customer pages and the admin dashboard, and payment logic and secrets stay on the server.',
+      },
+      {
+        title: 'PayHere checkout signed by the API',
+        text: "PayHere needs a hash built from the merchant secret. The API generates it, so the secret never reaches the browser, which only opens PayHere's checkout with the signed values.",
+      },
+      {
+        title: 'A business-logic layer in the API',
+        text: 'Order rules, such as who can place an order and which status changes are allowed, live in their own layer of rules, validators and workflows behind one facade. Route handlers stay thin and each rule is written once.',
+      },
     ],
     diagram: {
       columns: [
@@ -175,10 +196,21 @@ export const projects: ProjectEntry[] = [
       ],
     },
     challenges: [
-      { problem: '[TODO: the cart lost items between sessions]', fix: '[TODO: how you fixed cart persistence]' },
-      { problem: '[TODO: another problem you hit]', fix: '[TODO: how you solved it]' },
+      {
+        problem: "Carts are saved per user in the browser, and switching accounts at login or logout could load one user's cart into another's or wipe it before it was saved.",
+        fix: 'Saving now waits until the cart has finished loading, keeps a reference to the latest items for the switch, and skips the save that would otherwise fire straight after a load.',
+      },
+      {
+        problem: 'Ready-made and custom orders used different order ID formats, which made it hard to show both kinds together in My Orders.',
+        fix: 'One format for both, ORD-PRM-20251024-0012 for ready-made and ORD-CUS-… for custom orders, with a daily sequence, generated in the API and parsed the same way in the client.',
+      },
     ],
-    learnings: ['[TODO: what you learned]', '[TODO: what you learned]'],
+    learnings: [
+      "Managing client-side state across login and logout without mixing users' data",
+      'Keeping payment secrets on the server and signing requests there',
+      'Settling shared formats, like order IDs, across the API and the client before they spread',
+      'Working in a two-person team through feature branches and pull requests',
+    ],
   },
   {
     slug: 'ceylon-cuisine',
