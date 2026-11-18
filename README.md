@@ -23,12 +23,13 @@ Clicking a service on the landing map "deploys" its page.
   data stores (add a node by adding one object), `projects.ts` the project
   case studies, `experience.ts` roles and education as releases.
 - `src/components/` — `Shell` (top bar and layout), `SystemMap` (the
-  landing SVG map with a mobile list fallback), `ProjectCard` and
-  `CaseStudyHeader` (projects list and case-study top bar), `ProjectDiagram`
-  (architecture diagrams) and `StatusBar` / `DeployStrip`.
+  landing SVG map with a mobile list fallback), `ProjectCard` (projects
+  list), the case-study parts `StatusHeader`, `QuickFacts`, `ScreensGallery`
+  (with lightbox), `ProjectNav` and `ProjectDiagram`, and `StatusBar` /
+  `DeployStrip`.
 - `src/hooks/` — `usePageTitle` (per-route document title and focus).
 - `src/pages/` — one component per route: `Home`, `About`, `Projects`,
-  `Project` (`/projects/:slug`), `Experience`, `Contact`, `Accessibility`.
+  `CaseStudy` (`/projects/:slug`), `Experience`, `Contact`, `Accessibility`.
 
 ## Editing content
 

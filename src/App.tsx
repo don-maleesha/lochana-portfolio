@@ -4,7 +4,7 @@ import { MotionConfig } from 'framer-motion'
 import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
-import Project from './pages/Project'
+import CaseStudy from './pages/CaseStudy'
 import Experience from './pages/Experience'
 import Contact from './pages/Contact'
 import Accessibility from './pages/Accessibility'
@@ -25,7 +25,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:slug" element={<Project />} />
+        <Route path="/projects/:slug" element={<CaseStudy />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/accessibility" element={<Accessibility />} />

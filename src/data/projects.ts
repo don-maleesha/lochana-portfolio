@@ -1,22 +1,30 @@
 /**
  * Projects shown on /projects and their case-study pages (/projects/:slug).
- * Keep [square brackets] for anything not yet confirmed; never invent results or numbers.
+ * Keep [square brackets] for anything not yet confirmed (search for "TODO"); never invent results or numbers.
  *
- * slug         URL segment; also referenced from experience.ts.
- * title        Project name (card title and case-study <h1>).
- * year         Year or range.
- * featured     true for the one project shown large at the top of /projects.
- * context      Meta line, e.g. 'Team of 2 · Learning project'.
- * summary      One sentence on what was built and by whom, max ~120 characters (clamped to 2 lines).
- * stack        Full stack, shown on the case-study page.
- * keyStack     3–4 key technologies for the card (only the first 4 are shown).
- * thumbnail    Optional 16:9 screenshot in public/, e.g. '/projects/cakeshop.webp' (1200×675 WebP); cards show initials without it.
- * thumbnailAlt What the screenshot shows, for screen readers (falls back to 'Screenshot of <title>').
- * description  "What it does": one paragraph.
- * built        "What I built": your own part, one bullet per string.
- * learned      "What I learned": one bullet per string.
- * diagram      "How it fits together": columns of nodes left to right, plus edges between node ids.
- * links        External links (repo, demo), shown as standalone links.
+ * Projects list (cards)
+ *   slug         URL segment; also referenced from experience.ts.
+ *   title        Project name (card title and case-study <h1>).
+ *   year         Year or range.
+ *   featured     true for the one project shown large at the top of /projects.
+ *   context      Meta line, e.g. 'Team of 2 · Learning project'.
+ *   summary      One sentence on what was built and by whom, max ~120 characters.
+ *   keyStack     3–4 key technologies for the card (only the first 4 are shown).
+ *   thumbnail    Optional 16:9 screenshot in public/ (1200×675 WebP); cards show initials without it.
+ *   thumbnailAlt What the thumbnail shows (falls back to 'Screenshot of <title>').
+ *
+ * Case study (every section is optional and is skipped, with sections renumbered, when empty)
+ *   role, team, duration  "Quick facts" rows.
+ *   links        { github, demo }: outlined buttons under the summary; a missing link is hidden.
+ *   stackGroups  Quick-facts rows, e.g. { label: 'Frontend', items: ['React', 'Vite'] }.
+ *   overview     01 Overview: the problem and what the app does, 2–3 sentences.
+ *   myRole       02 My role: what you personally built, one bullet per string.
+ *   features     03 Key features: 3–5 { title, text }.
+ *   screens      Screenshots. screens[0] is the hero image; the rest form 04 Screens (with lightbox).
+ *   decisions    05 Technical decisions: { title, text } with the why. The architecture diagram leads this section.
+ *   diagram      Architecture diagram: columns of nodes left to right, plus edges between node ids.
+ *   challenges   06 Challenges: { problem, fix }.
+ *   learnings    07 What I learned: one bullet per string.
  */
 
 export type DiagramNode = {
@@ -30,25 +38,39 @@ export type DiagramColumn = { label: string; nodes: DiagramNode[] }
 export type ProjectDiagram = { columns: DiagramColumn[]; edges: [from: string, to: string][] }
 export type ExternalLink = { label: string; href: `https://${string}` }
 
+export type StackGroup = { label: string; items: string[] }
+export type Screen = { src: string; alt: string; caption?: string }
+export type TitledText = { title: string; text: string }
+export type Challenge = { problem: string; fix: string }
+
 export type ProjectEntry = {
+  // Projects list
   slug: string
   title: string
   year: string
   featured: boolean
   context: string
   summary: string
-  stack: string[]
   keyStack: string[]
   thumbnail?: string
   thumbnailAlt?: string
-  description: string
-  built: string[]
-  learned: string[]
-  diagram: ProjectDiagram
-  links: ExternalLink[]
+  // Case study
+  role?: string
+  team?: string
+  duration?: string
+  links?: { github?: `https://${string}`; demo?: `https://${string}` }
+  stackGroups?: StackGroup[]
+  overview?: string
+  myRole?: string[]
+  features?: TitledText[]
+  screens?: Screen[]
+  decisions?: TitledText[]
+  diagram?: ProjectDiagram
+  challenges?: Challenge[]
+  learnings?: string[]
 }
 
-/** Copy for the /projects page itself */
+/** Copy for the /projects page and the case-study pages */
 export const projectsPage = {
   eyebrow: 'GET /projects',
   title: 'Projects',
@@ -60,6 +82,17 @@ export const projectsPage = {
   cardCtaBusy: 'deploying…',
   /** Case-study top bar status: '● live · <year>' */
   caseStatus: 'live',
+  caseLinks: { github: 'GitHub', demo: 'Live demo' },
+  quickFacts: { heading: 'Quick facts', role: 'Role', team: 'Team', duration: 'Duration' },
+  sections: {
+    overview: 'Overview',
+    myRole: 'My role',
+    features: 'Key features',
+    screens: 'Screens',
+    decisions: 'Technical decisions',
+    challenges: 'Challenges',
+    learnings: 'What I learned',
+  },
   experience: { text: 'Looking for production work?', label: '→ view experience', to: '/experience' },
   github: { label: 'More on GitHub →', href: 'https://github.com/don-maleesha' } as ExternalLink,
 }
@@ -72,19 +105,47 @@ export const projects: ProjectEntry[] = [
     featured: true,
     context: 'Team of 2 · Learning project',
     summary: 'Cake shop e-commerce app with cart, custom orders, PayHere checkout and an admin dashboard, built with a teammate.',
-    stack: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Axios', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Nodemailer', 'PayHere'],
     keyStack: ['React', 'Tailwind CSS', 'PayHere'],
     thumbnail: '/projects/cakeshop.webp',
     thumbnailAlt: 'CakeShop home page with the headline Delicious Cakes Made Fresh Daily, Shop Now and Custom Orders buttons, and a photo of a fruit-topped cake',
-    description:
-      'Customers browse cakes by category with search and filters, add them to a cart or wishlist, request custom cakes and track their orders, paying by cash on delivery or through PayHere with zone-based delivery fees. An admin side manages products, categories, orders, custom requests, reviews and customer messages, with a sales and order analytics dashboard.',
-    built: [
+    role: '[TODO: your role, e.g. Full-stack developer]',
+    team: '2 people',
+    duration: 'Jun–Dec 2025', // from the repo's commit history
+    links: { github: 'https://github.com/don-maleesha/CakeShop' },
+    stackGroups: [
+      { label: 'Frontend', items: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Axios'] },
+      { label: 'Backend', items: ['Node.js', 'Express'] },
+      { label: 'Data', items: ['MongoDB', 'Mongoose'] },
+      { label: 'Auth', items: ['JWT', 'bcrypt'] },
+      { label: 'Payments', items: ['PayHere'] },
+      { label: 'Email', items: ['Nodemailer'] },
+    ],
+    overview:
+      '[TODO: the problem in one sentence: who needed this and why.] Customers browse cakes by category with search and filters, add them to a cart or wishlist, request custom cakes and track their orders, paying by cash on delivery or through PayHere. An admin side manages products, orders, custom requests and reviews, with a sales and order analytics dashboard.',
+    myRole: [
       'Set up the React and Vite client, and built registration, login and role-based access for customers and admins',
       'Built the home and cakes pages, the cart and checkout, and the PayHere payment integration',
       'Built the admin side: product and order management and an analytics dashboard',
       'Added My Orders with a unified order ID, reviews and ratings, and a wishlist, with their Express endpoints',
     ],
-    learned: ['[What you learned]', '[What you learned]'],
+    features: [
+      { title: 'Cart and checkout', text: '[TODO: what the customer can do and what makes it work well]' },
+      { title: 'Custom cake orders', text: '[TODO: how a customer requests a custom cake and how admins handle it]' },
+      { title: 'Admin analytics', text: '[TODO: what the dashboard shows and who uses it]' },
+      { title: 'Reviews and wishlist', text: '[TODO: how customers review and save cakes]' },
+    ],
+    // screens[0] is the hero. TODO: add more screenshots (1200×675 WebP in public/projects/) to fill "Screens".
+    screens: [
+      {
+        src: '/projects/cakeshop.webp',
+        alt: 'CakeShop home page with the headline Delicious Cakes Made Fresh Daily, Shop Now and Custom Orders buttons, and a photo of a fruit-topped cake',
+      },
+    ],
+    decisions: [
+      { title: 'Separate React client and Express API', text: '[TODO: why the front end and API are split, and what that made easier]' },
+      { title: 'PayHere checkout signed by the API', text: '[TODO: why the payment hash is generated on the server, not in the browser]' },
+      { title: 'A business-logic layer in the API', text: '[TODO: why order rules and workflows live in their own layer]' },
+    ],
     diagram: {
       columns: [
         { label: 'CLIENT', nodes: [{ id: 'browser', title: 'Browser', sub: 'customers · admins' }] },
@@ -112,7 +173,11 @@ export const projects: ProjectEntry[] = [
         ['api', 'mail'],
       ],
     },
-    links: [{ label: 'View code on GitHub →', href: 'https://github.com/don-maleesha/CakeShop' }],
+    challenges: [
+      { problem: '[TODO: the cart lost items between sessions]', fix: '[TODO: how you fixed cart persistence]' },
+      { problem: '[TODO: another problem you hit]', fix: '[TODO: how you solved it]' },
+    ],
+    learnings: ['[TODO: what you learned]', '[TODO: what you learned]'],
   },
   {
     slug: 'ceylon-cuisine',
@@ -121,19 +186,32 @@ export const projects: ProjectEntry[] = [
     featured: false,
     context: 'Solo · Learning project',
     summary: 'Solo-built recipe-sharing app for Sri Lankan dishes, with member submissions, admin moderation and ratings.',
-    stack: ['PHP', 'MySQL', 'JavaScript', 'AJAX', 'CSS'],
     keyStack: ['PHP', 'MySQL', 'JavaScript'],
     thumbnail: '/projects/ceylon-cuisine.webp',
     thumbnailAlt: 'Ceylon Cuisine home page welcoming visitors, with Explore and Submit buttons and a photo of a Sri Lankan rice and curry meal',
-    description:
+    role: 'Solo developer',
+    team: 'Solo',
+    duration: 'May 2024 – Jul 2025', // repo created / last updated
+    links: { github: 'https://github.com/don-maleesha/ceylon-cuisine' },
+    stackGroups: [
+      { label: 'Frontend', items: ['JavaScript', 'AJAX', 'CSS'] },
+      { label: 'Backend', items: ['PHP'] },
+      { label: 'Data', items: ['MySQL'] },
+    ],
+    overview:
       'Guests browse and search recipes; registered members submit their own with ingredients, steps and photos, rate recipes and keep favourites. Submissions go through an admin approval workflow, and an admin dashboard covers user management, recipe moderation and platform statistics. Accounts use hashed passwords and role-based access for admins and members.',
-    built: [
+    myRole: [
       'Designed and built the whole application on my own: PHP pages and AJAX endpoints, the MySQL schema and the front end',
       'Built sign-up and sign-in with hashed passwords, and role-based access for members and admins',
       'Built recipe submission with image uploads and an admin approval workflow',
       'Added ratings, favourites, category filters, search and sorting, and an admin dashboard with platform statistics',
     ],
-    learned: ['[What you learned]', '[What you learned]'],
+    screens: [
+      {
+        src: '/projects/ceylon-cuisine.webp',
+        alt: 'Ceylon Cuisine home page welcoming visitors, with Explore and Submit buttons and a photo of a Sri Lankan rice and curry meal',
+      },
+    ],
     diagram: {
       columns: [
         { label: 'CLIENT', nodes: [{ id: 'browser', title: 'Browser', sub: 'guests · members · admins' }] },
@@ -152,7 +230,7 @@ export const projects: ProjectEntry[] = [
         ['php', 'uploads'],
       ],
     },
-    links: [{ label: 'View code on GitHub →', href: 'https://github.com/don-maleesha/ceylon-cuisine' }],
+    learnings: ['[What you learned]', '[What you learned]'],
   },
   {
     slug: 'relaxu',
@@ -161,19 +239,33 @@ export const projects: ProjectEntry[] = [
     featured: false,
     context: 'Team of 4 · University project',
     summary: 'Stress-monitoring and workload app for university students, built by a team of four on a custom PHP MVC.',
-    stack: ['PHP', 'JavaScript', 'HTML', 'CSS', 'MySQL', 'PHPMailer'],
     keyStack: ['PHP', 'JavaScript', 'MySQL'],
     thumbnail: '/projects/relaxu.webp',
     thumbnailAlt: 'RelaxU home page with the headline Healthy Minds, Happy Lives, Student Mental Health Consultancy, a Get started button and a photo of a student studying',
-    description:
-      'RelaxU helps university students notice stress early and keep their workload under control. It combines self-assessment surveys and typing-behaviour analysis for stress insights with mindfulness, guided meditation and breathing exercises, and recommends counselling at high stress levels. Coursework organisers, reminders and priority-based planning sit alongside discussion forums, peer support groups, articles and videos, and session booking with counsellors and academic advisors. It is built on a custom MVC architecture in plain PHP and JavaScript, with no frameworks.',
-    built: [
+    role: 'Developer, relaxation activities module',
+    team: '4 people',
+    duration: 'Sep 2024 – May 2025', // team repo created / last updated
+    links: { github: 'https://github.com/ovindumandith/GroupProject-IS2102' },
+    stackGroups: [
+      { label: 'Frontend', items: ['HTML', 'CSS', 'JavaScript'] },
+      { label: 'Backend', items: ['PHP (custom MVC)'] },
+      { label: 'Data', items: ['MySQL (PDO)'] },
+      { label: 'Email', items: ['PHPMailer'] },
+    ],
+    overview:
+      'RelaxU helps university students notice stress early and keep their workload under control. It combines self-assessment surveys and typing-behaviour analysis for stress insights with mindfulness, guided meditation and breathing exercises, and recommends counselling at high stress levels. Coursework organisers, reminders and priority-based planning sit alongside discussion forums, peer support groups, and session booking with counsellors and academic advisors.',
+    myRole: [
       'Built the relaxation activities module, my part of the team of four',
       'Built the student-facing activity cards, with descriptions and links to guided videos and playlists',
       'Built the admin portal to add, edit and delete activities, across the controller, model and views',
       'Grouped activities by stress level (low, moderate, high) for the stress-level suggester',
     ],
-    learned: ['[What you learned]', '[What you learned]'],
+    screens: [
+      {
+        src: '/projects/relaxu.webp',
+        alt: 'RelaxU home page with the headline Healthy Minds, Happy Lives, Student Mental Health Consultancy, a Get started button and a photo of a student studying',
+      },
+    ],
     diagram: {
       columns: [
         { label: 'CLIENT', nodes: [{ id: 'browser', title: 'Browser', sub: 'HTML · CSS · JS' }] },
@@ -198,6 +290,6 @@ export const projects: ProjectEntry[] = [
         ['models', 'mysql'],
       ],
     },
-    links: [{ label: 'View code on GitHub →', href: 'https://github.com/ovindumandith/GroupProject-IS2102' }],
+    learnings: ['[What you learned]', '[What you learned]'],
   },
 ]

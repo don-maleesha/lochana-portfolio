@@ -6,7 +6,7 @@ import { projectsPage } from '../data/projects'
  * "● live · <year>" status on the right, styled like the site's availability status.
  * Rendered inside Shell's <header> via its `topbar` prop. No animation.
  */
-export default function CaseStudyHeader({ current, year }: { current: string; year?: string }) {
+export default function StatusHeader({ current, year }: { current: string; year?: string }) {
   return (
     <>
       <nav aria-label="Breadcrumb" className="crumbs">
