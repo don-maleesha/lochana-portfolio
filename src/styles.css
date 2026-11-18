@@ -444,6 +444,20 @@ ul.chips {
   margin: 0;
   padding-left: 20px;
 }
+.diagram-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.diagram-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding-left: 20px;
+}
+
 /* ---------- Case study ---------- */
 .case-study {
   display: flex;
