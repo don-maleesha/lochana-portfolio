@@ -239,6 +239,48 @@ export const projects: ProjectEntry[] = [
       'Built recipe submission with image uploads and an admin approval workflow',
       'Added ratings, favourites, category filters, search and sorting, and an admin dashboard with platform statistics',
     ],
+    features: [
+      {
+        title: 'Browse and search',
+        text: 'Category filters, search by title, sorting and pagination, with each recipe opening in a detail view that has its own link.',
+      },
+      {
+        title: 'Recipe submissions',
+        text: 'Members submit recipes with ingredients, steps and a photo. New recipes stay pending, marked with a badge in My Recipes, until an admin approves them.',
+      },
+      {
+        title: 'Ratings and favourites',
+        text: 'Members rate each recipe once, and rating again updates their score. They can also save favourites. Both work without a page reload.',
+      },
+      {
+        title: 'Admin dashboard',
+        text: 'Admins approve or reject submissions, edit recipes, manage and delete users, and see platform statistics.',
+      },
+    ],
+    decisions: [
+      {
+        title: 'Prepared statements and escaped output',
+        text: 'Queries that take user input bind their values through prepared statements, and recipe text is escaped before it is shown, to guard against SQL injection and cross-site scripting.',
+      },
+      {
+        title: 'Average rating stored on the recipe',
+        text: "Each member's rating is saved once and updated if they rate again, then the recipe's average is recalculated and stored with it. Listing pages read one column instead of averaging ratings for every card.",
+      },
+      {
+        title: 'Moderation before publishing',
+        text: 'New recipes are saved as pending and only approved recipes appear publicly, so admins check every submission before anyone else sees it.',
+      },
+    ],
+    challenges: [
+      {
+        problem: 'Members could not see recipes they had submitted while those waited for approval.',
+        fix: 'My Recipes now shows pending submissions in their own section with a Pending badge, styled to match approved recipes.',
+      },
+      {
+        problem: 'Recipe search returned the wrong results and some recipe data was missing from the recipes page.',
+        fix: 'Search moved to a parameterised SQL query on recipe titles with a choice of sort order, and each recipe opens in a detail view linked from the URL.',
+      },
+    ],
     screens: [
       {
         src: '/projects/ceylon-cuisine.webp',
@@ -263,7 +305,12 @@ export const projects: ProjectEntry[] = [
         ['php', 'uploads'],
       ],
     },
-    learnings: ['[What you learned]', '[What you learned]'],
+    learnings: [
+      'Building a complete app without a framework: sessions, page flows and AJAX endpoints in plain PHP',
+      'Protecting a database-backed app with prepared statements, escaped output and checked uploads',
+      'Designing a moderation workflow with pending, approved and rejected states',
+      'Carrying a solo project from static pages to a finished app over more than a year',
+    ],
   },
   {
     slug: 'relaxu',
@@ -293,6 +340,48 @@ export const projects: ProjectEntry[] = [
       'Built the admin portal to add, edit and delete activities, across the controller, model and views',
       'Grouped activities by stress level (low, moderate, high) for the stress-level suggester',
     ],
+    features: [
+      {
+        title: 'Stress monitoring',
+        text: 'Self-assessment surveys and typing-behaviour analysis give students insight into their stress level as it changes.',
+      },
+      {
+        title: 'Relaxation activities',
+        text: 'Breathing exercises, guided meditation and other activities grouped by stress level, with counselling recommended at high stress. This is the module I built.',
+      },
+      {
+        title: 'Workload management',
+        text: 'Coursework organisers, task reminders, progress trackers and priority-based planning.',
+      },
+      {
+        title: 'Peer and professional support',
+        text: 'Discussion forums and virtual support groups, stress-awareness articles and videos, and session booking with counsellors and academic advisors.',
+      },
+    ],
+    decisions: [
+      {
+        title: 'Activities grouped by stress level',
+        text: 'Each activity carries a low, moderate or high stress level, the same scale the stress assessment uses, and students reach them through a suggester page instead of one long list.',
+      },
+      {
+        title: 'Linking out to guided videos and playlists',
+        text: 'Activities point to existing guided videos and playlists by URL rather than hosting media, which keeps the module light and lets admins update content without uploading video.',
+      },
+      {
+        title: 'Server-side checks on image uploads',
+        text: 'Activity images are checked against a list of allowed types and a 5 MB limit, and saved under unique names so uploads never overwrite each other.',
+      },
+    ],
+    challenges: [
+      {
+        problem: 'One long list of activities gave stressed students no guidance on what to try first.',
+        fix: 'Every activity got a stress level, the list split into low, moderate and high pages, and a suggester page points students to the level that fits them.',
+      },
+      {
+        problem: 'Managing activities from the admin portal made it easy to lose your place or delete something by accident.',
+        fix: "After saving, admins return to the page for that activity's stress level, and deleting asks for confirmation first.",
+      },
+    ],
     screens: [
       {
         src: '/projects/relaxu.webp',
@@ -321,6 +410,11 @@ export const projects: ProjectEntry[] = [
         ['models', 'mysql'],
       ],
     },
-    learnings: ['[What you learned]', '[What you learned]'],
+    learnings: [
+      'Building one module end to end, from database table to admin portal, inside a shared custom MVC codebase',
+      'Working alongside three teammates in one repository',
+      'Validating uploads on the server instead of trusting the browser',
+      "Organising content around the user's situation, here their stress level",
+    ],
   },
 ]
