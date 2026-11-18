@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
 import Shell from '../components/Shell'
 import RequestPreview from '../components/RequestPreview'
@@ -16,6 +16,15 @@ type Errors = Partial<Record<Field, string>>
 const FIELDS: Field[] = ['name', 'email', 'message']
 const EMPTY: Values = { name: '', email: '', message: '' }
 
+// The template value in .env counts as missing, so it never reaches Web3Forms
+const PLACEHOLDER_KEY = 'PASTE_KEY_HERE'
+const getAccessKey = () => {
+  const key = import.meta.env.VITE_WEB3FORMS_KEY?.trim()
+  return key && key !== PLACEHOLDER_KEY ? key : ''
+}
+const MISSING_KEY_HELP = 'VITE_WEB3FORMS_KEY missing — create .env in project root and restart `npm run dev`.'
+let warnedMissingKey = false // StrictMode runs effects twice in dev; warn once
+
 function validateField(field: Field, value: string): string | undefined {
   const v = value.trim()
   if (field === 'name' && !v) return page.errors.name
@@ -30,6 +39,13 @@ export default function Contact() {
   const [errors, setErrors] = useState<Errors>({})
   const [status, setStatus] = useState<ResponseState>('idle')
   const sending = status === 'sending'
+
+  useEffect(() => {
+    if (import.meta.env.DEV && !getAccessKey() && !warnedMissingKey) {
+      warnedMissingKey = true
+      console.warn(MISSING_KEY_HELP)
+    }
+  }, [])
 
   function setFieldError(field: Field, value: string) {
     setErrors((prev) => ({ ...prev, [field]: validateField(field, value) }))
@@ -60,11 +76,15 @@ export default function Contact() {
       return
     }
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY
+    const accessKey = getAccessKey()
+    if (!accessKey) {
+      console.error(`Contact form not sent: ${MISSING_KEY_HELP}`)
+      setStatus('error')
+      return
+    }
     const botcheck = (form.elements.namedItem('botcheck') as HTMLInputElement).checked
     setStatus('sending')
     try {
-      if (!accessKey) throw new Error('VITE_WEB3FORMS_KEY is not set')
       const res = await fetch(page.endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -77,14 +97,20 @@ export default function Contact() {
           botcheck,
         }),
       })
-      const data = (await res.json().catch(() => ({}))) as { success?: boolean }
-      if (!res.ok || !data.success) throw new Error(`Web3Forms responded ${res.status}`)
-      setStatus('success')
-      setValues(EMPTY)
-      setErrors({})
-      form.reset()
+      const data = (await res.json().catch(() => null)) as { success?: boolean; message?: string } | null
+      if (res.ok && data?.success) {
+        // 201 Created
+        setStatus('success')
+        setValues(EMPTY)
+        setErrors({})
+        form.reset()
+        return
+      }
+      console.error(`Contact form: Web3Forms responded ${res.status}`, data)
+      // 4xx: Web3Forms rejected the request → 422; anything else → 500
+      setStatus(res.status >= 400 && res.status < 500 ? 'invalid' : 'error')
     } catch (err) {
-      console.error('Contact form failed:', err)
+      console.error('Contact form: request failed', err)
       setStatus('error')
     }
   }

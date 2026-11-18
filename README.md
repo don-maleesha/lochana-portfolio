@@ -51,13 +51,29 @@ doesn't exist fails `npm run build`.
 | Contact page copy, response messages and endpoint links (GitHub, LinkedIn, email) | `src/data/contact.ts` |
 | Accessibility page copy | `src/pages/Accessibility.tsx` |
 
-The contact form sends through [Web3Forms](https://web3forms.com). Put the
-access key in `VITE_WEB3FORMS_KEY`: locally in `.env.local` (copy `.env.example`),
-and on Vercel under Project Settings → Environment Variables. Without a key the
-form shows its error state and sends nothing.
+The contact form sends through [Web3Forms](https://web3forms.com); see
+[Environment variables](#environment-variables) for its key.
 
 Pushing to `main` redeploys the site on Vercel. Run `npm run lint` and
 `npm run build` first; a build error there will also fail the deploy.
+
+## Environment variables
+
+| Variable | Used for |
+|---|---|
+| `VITE_WEB3FORMS_KEY` | Web3Forms access key for the contact form |
+
+1. Create `.env` in the project root (next to `package.json`, not in `src/`)
+   from the template: `cp .env.example .env`, then fill in the value. `.env` is
+   git-ignored; only `.env.example` is committed.
+2. Restart `npm run dev` after any change to `.env`. Vite reads it only at
+   startup.
+3. Before deploying, add `VITE_WEB3FORMS_KEY` in the hosting provider's
+   environment settings (Vercel: Project Settings → Environment Variables) and
+   redeploy, because the value is built into the site.
+
+Without a key (or with the `PASTE_KEY_HERE` placeholder) the form sends nothing,
+shows its 500 state, and in development logs a warning in the browser console.
 
 # React + TypeScript + Vite
 
