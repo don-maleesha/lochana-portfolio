@@ -21,21 +21,11 @@
  *   myRole       02 My role: what you personally built, one bullet per string.
  *   features     03 Key features: 3–5 { title, text }.
  *   screens      Screenshots. screens[0] is the hero image; the rest form 04 Screens (with lightbox).
- *   decisions    05 Technical decisions: { title, text } with the why. The architecture diagram leads this section.
- *   diagram      Architecture diagram: columns of nodes left to right, plus edges between node ids.
+ *   decisions    05 Technical decisions: { title, text } with the why.
  *   challenges   06 Challenges: { problem, fix }.
  *   learnings    07 What I learned: one bullet per string.
  */
 
-export type DiagramNode = {
-  id: string
-  title: string
-  sub: string
-  /** 'store' draws a dashed box, as for data stores and external services on the landing map */
-  kind?: 'store'
-}
-export type DiagramColumn = { label: string; nodes: DiagramNode[] }
-export type ProjectDiagram = { columns: DiagramColumn[]; edges: [from: string, to: string][] }
 export type ExternalLink = { label: string; href: `https://${string}` }
 
 export type StackGroup = { label: string; items: string[] }
@@ -65,7 +55,6 @@ export type ProjectEntry = {
   features?: TitledText[]
   screens?: Screen[]
   decisions?: TitledText[]
-  diagram?: ProjectDiagram
   challenges?: Challenge[]
   learnings?: string[]
 }
@@ -146,33 +135,6 @@ export const projects: ProjectEntry[] = [
       { title: 'PayHere checkout signed by the API', text: '[TODO: why the payment hash is generated on the server, not in the browser]' },
       { title: 'A business-logic layer in the API', text: '[TODO: why order rules and workflows live in their own layer]' },
     ],
-    diagram: {
-      columns: [
-        { label: 'CLIENT', nodes: [{ id: 'browser', title: 'Browser', sub: 'customers · admins' }] },
-        { label: 'FRONTEND', nodes: [{ id: 'spa', title: 'React SPA', sub: 'Vite · Router · Context' }] },
-        {
-          label: 'SERVICES',
-          nodes: [
-            { id: 'api', title: 'Express API', sub: 'Node · JWT auth' },
-            { id: 'payhere', title: 'PayHere', sub: 'checkout · API-signed', kind: 'store' },
-          ],
-        },
-        {
-          label: 'DATA',
-          nodes: [
-            { id: 'db', title: 'MongoDB', sub: 'Mongoose models', kind: 'store' },
-            { id: 'mail', title: 'Nodemailer', sub: 'order emails', kind: 'store' },
-          ],
-        },
-      ],
-      edges: [
-        ['browser', 'spa'],
-        ['spa', 'api'],
-        ['spa', 'payhere'],
-        ['api', 'db'],
-        ['api', 'mail'],
-      ],
-    },
     challenges: [
       { problem: '[TODO: the cart lost items between sessions]', fix: '[TODO: how you fixed cart persistence]' },
       { problem: '[TODO: another problem you hit]', fix: '[TODO: how you solved it]' },
@@ -212,24 +174,6 @@ export const projects: ProjectEntry[] = [
         alt: 'Ceylon Cuisine home page welcoming visitors, with Explore and Submit buttons and a photo of a Sri Lankan rice and curry meal',
       },
     ],
-    diagram: {
-      columns: [
-        { label: 'CLIENT', nodes: [{ id: 'browser', title: 'Browser', sub: 'guests · members · admins' }] },
-        { label: 'SERVER', nodes: [{ id: 'php', title: 'PHP application', sub: 'pages · AJAX · admin' }] },
-        {
-          label: 'DATA',
-          nodes: [
-            { id: 'mysql', title: 'MySQL', sub: 'users · recipes · ratings', kind: 'store' },
-            { id: 'uploads', title: 'Uploads', sub: 'recipe images', kind: 'store' },
-          ],
-        },
-      ],
-      edges: [
-        ['browser', 'php'],
-        ['php', 'mysql'],
-        ['php', 'uploads'],
-      ],
-    },
     learnings: ['[What you learned]', '[What you learned]'],
   },
   {
@@ -266,30 +210,6 @@ export const projects: ProjectEntry[] = [
         alt: 'RelaxU home page with the headline Healthy Minds, Happy Lives, Student Mental Health Consultancy, a Get started button and a photo of a student studying',
       },
     ],
-    diagram: {
-      columns: [
-        { label: 'CLIENT', nodes: [{ id: 'browser', title: 'Browser', sub: 'HTML · CSS · JS' }] },
-        { label: 'ENTRY', nodes: [{ id: 'router', title: 'Router', sub: 'index.php · routes' }] },
-        { label: 'APP', nodes: [{ id: 'controllers', title: 'Controllers', sub: 'and services' }] },
-        {
-          label: 'MVC',
-          nodes: [
-            { id: 'models', title: 'Models', sub: 'PDO queries' },
-            { id: 'views', title: 'Views', sub: 'PHP templates' },
-            { id: 'mail', title: 'PHPMailer', sub: 'email', kind: 'store' },
-          ],
-        },
-        { label: 'DATA', nodes: [{ id: 'mysql', title: 'MySQL', sub: 'stress_management', kind: 'store' }] },
-      ],
-      edges: [
-        ['browser', 'router'],
-        ['router', 'controllers'],
-        ['controllers', 'models'],
-        ['controllers', 'views'],
-        ['controllers', 'mail'],
-        ['models', 'mysql'],
-      ],
-    },
     learnings: ['[What you learned]', '[What you learned]'],
   },
 ]

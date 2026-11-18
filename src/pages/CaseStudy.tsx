@@ -4,7 +4,6 @@ import Shell from '../components/Shell'
 import StatusHeader from '../components/StatusHeader'
 import QuickFacts from '../components/QuickFacts'
 import ScreensGallery from '../components/ScreensGallery'
-import ProjectDiagram from '../components/ProjectDiagram'
 import ProjectNav from '../components/ProjectNav'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { profile } from '../data/profile'
@@ -48,17 +47,8 @@ export default function CaseStudy() {
   if (gallery.length) {
     sections.push({ id: 'screens', title: s.screens, body: <ScreensGallery screens={gallery} /> })
   }
-  if (project.decisions?.length || project.diagram) {
-    sections.push({
-      id: 'decisions',
-      title: s.decisions,
-      body: (
-        <>
-          {project.diagram && <ProjectDiagram diagram={project.diagram} />}
-          {project.decisions?.length ? <TitledList items={project.decisions} /> : null}
-        </>
-      ),
-    })
+  if (project.decisions?.length) {
+    sections.push({ id: 'decisions', title: s.decisions, body: <TitledList items={project.decisions} /> })
   }
   if (project.challenges?.length) {
     sections.push({

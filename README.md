@@ -25,7 +25,7 @@ Clicking a service on the landing map "deploys" its page.
 - `src/components/` — `Shell` (top bar and layout), `SystemMap` (the
   landing SVG map with a mobile list fallback), `ProjectCard` (projects
   list), the case-study parts `StatusHeader`, `QuickFacts`, `ScreensGallery`
-  (with lightbox), `ProjectNav` and `ProjectDiagram`, and `StatusBar` /
+  (with lightbox) and `ProjectNav`, and `StatusBar` /
   `DeployStrip`.
 - `src/hooks/` — `usePageTitle` (per-route document title and focus).
 - `src/pages/` — one component per route: `Home`, `About`, `Projects`,
