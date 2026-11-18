@@ -41,6 +41,8 @@ doesn't exist fails `npm run build`.
 | Content | File |
 |---|---|
 | Name, home headline, the whole About page (intro, bio, skills, links) | `src/data/profile.ts` (field guide at the top of the file) |
+| Experience "at a glance" panel (location, domain, stack) | `src/data/profile.ts` (`glance`); role, company and shipped count come from `src/data/experience.ts` |
+| Downloadable CV | `public/cv.pdf`: the "Download CV" button appears only when this file exists at build time |
 | Header status line ("open to opportunities") and its on/off switch | `src/data/availability.ts` |
 | Services and data stores on the landing map | `src/data/system.ts` |
 | Projects list and project case studies | `src/data/projects.ts` |

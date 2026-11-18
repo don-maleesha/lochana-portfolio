@@ -10,6 +10,10 @@
  *   bioHeading, bio         Bio card heading; each string is one paragraph.
  *   skillsHeading, skills   Skills card heading; one row per category, chips in the given order.
  *   links                   Closing links under Skills; `to` must be one of the site's routes.
+ * glance      "At a glance" panel on /experience: location, domain, stack and the CV button.
+ *             Status comes from availability.ts; role, company and the shipped count come from
+ *             the current release in experience.ts, so none of them is written twice.
+ *             The CV button only appears when public/cv.pdf exists at build time.
  */
 
 /** Routes a content link may point to (see App.tsx). */
@@ -29,11 +33,21 @@ export type AboutContent = {
   links: ContentLink[]
 }
 
+export type GlanceContent = {
+  heading: string
+  labels: { status: string; role: string; company: string; location: string; domain: string; shipped: string; stack: string }
+  location: string
+  domain: string
+  stack: string[]
+  cv: { href: string; label: string }
+}
+
 export type Profile = {
   name: string
   shortName: string
   headline: string
   about: AboutContent
+  glance: GlanceContent
 }
 
 export const profile: Profile = {
@@ -62,5 +76,13 @@ export const profile: Profile = {
       { label: 'View projects →', to: '/projects' },
       { label: 'Get in touch →', to: '/contact' },
     ],
+  },
+  glance: {
+    heading: 'at a glance',
+    labels: { status: 'status', role: 'role', company: 'company', location: 'location', domain: 'domain', shipped: 'shipped', stack: 'stack' },
+    location: 'Sri Lanka',
+    domain: 'Government agriculture systems',
+    stack: ['Java', 'Spring Boot', 'React', 'MUI'],
+    cv: { href: '/cv.pdf', label: 'Download CV' },
   },
 }

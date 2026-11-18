@@ -509,7 +509,7 @@ ul.chips {
   .case-main {
     grid-area: main;
   }
-  .quick-facts {
+  .case-body .quick-facts {
     grid-area: side;
     position: sticky;
     top: 2rem;
@@ -682,8 +682,40 @@ ul.chips {
 }
 
 /* ---------- Experience timeline ---------- */
-.experience-page {
-  max-width: 900px;
+.experience-grid {
+  display: grid;
+  gap: 2rem;
+}
+.experience-main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
+}
+/* Wide screens: timeline left, sticky "at a glance" right. Narrow: sidebar under the subtitle. */
+@media (min-width: 1024px) {
+  .experience-grid {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    grid-template-areas: 'main side';
+    column-gap: 4rem;
+    align-items: start;
+  }
+  .experience-main {
+    grid-area: main;
+  }
+  .at-a-glance {
+    grid-area: side;
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+  }
+}
+.at-a-glance .quick-facts-row {
+  grid-template-columns: 72px minmax(0, 1fr);
+}
+.at-a-glance-cv {
+  justify-content: center;
+  margin-top: 8px;
 }
 .tl-section {
   display: flex;
@@ -699,9 +731,10 @@ ul.chips {
   color: var(--ink-3);
 }
 .timeline {
+  --tl-gap: 40px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: var(--tl-gap);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -711,12 +744,16 @@ ul.chips {
 .tl-item {
   position: relative;
 }
+.timeline.education {
+  --tl-gap: 0.75rem;
+}
+/* Rail x = version column (60px) + column gap (10px) + half the dot column (12px) - half the line */
 .tl-item::before {
   content: '';
   position: absolute;
   top: 12px;
-  bottom: -40px;
-  left: 99px;
+  bottom: calc(-1 * var(--tl-gap));
+  left: 81px;
   width: 2px;
   background: var(--edge);
 }
@@ -725,8 +762,8 @@ ul.chips {
 }
 .tl-entry {
   display: grid;
-  grid-template-columns: 72px 24px minmax(0, 1fr);
-  column-gap: 16px;
+  grid-template-columns: 60px 24px minmax(0, 1fr);
+  column-gap: 10px;
   align-items: start;
 }
 .tl-version {
@@ -812,7 +849,7 @@ ul.chips {
 .tl-projects {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
   margin: 0;
   padding: 0 0 0 16px;
   list-style: none;
@@ -835,6 +872,7 @@ ul.chips {
   color: var(--ink-3);
 }
 .tl-bullets {
+  gap: 0.25rem;
   list-style: disc;
 }
 .tl-bullets li {
