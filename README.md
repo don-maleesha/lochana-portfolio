@@ -25,7 +25,8 @@ Clicking a service on the landing map "deploys" its page.
 - `src/components/` — `Shell` (top bar and layout), `SystemMap` (the
   landing SVG map with a mobile list fallback), `ProjectCard` (projects
   list), the case-study parts `StatusHeader`, `QuickFacts`, `ScreensGallery`
-  (with lightbox), `ProjectNav` and `ProjectDiagram`, and `StatusBar` /
+  (with lightbox), `ProjectNav` and `ProjectDiagram`, `ReleaseEntry` (Experience
+  timeline), and `StatusBar` /
   `DeployStrip`.
 - `src/hooks/` — `usePageTitle` (per-route document title and focus).
 - `src/pages/` — one component per route: `Home`, `About`, `Projects`,
@@ -43,7 +44,7 @@ doesn't exist fails `npm run build`.
 | Header status line ("open to opportunities") and its on/off switch | `src/data/availability.ts` |
 | Services and data stores on the landing map | `src/data/system.ts` |
 | Projects list and project case studies | `src/data/projects.ts` |
-| Experience page (roles and education as releases) | `src/data/experience.ts` |
+| Experience page (work with project changelogs, and education, as a release timeline) | `src/data/experience.ts` |
 | Search and social preview text (meta description, `og:*`) | `index.html` — keep in sync with the home headline |
 | Contact and Accessibility page copy | `src/pages/Contact.tsx`, `src/pages/Accessibility.tsx` |
 

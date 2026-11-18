@@ -681,6 +681,198 @@ ul.chips {
   font-size: 13px;
 }
 
+/* ---------- Experience timeline ---------- */
+.experience-page {
+  max-width: 900px;
+}
+.tl-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.tl-divider {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Rail: version | dot + line | content. The line runs down each entry from its dot,
+   continuing to the next dot, and ends at the bottom of the section's last entry. */
+.tl-item {
+  position: relative;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: -40px;
+  left: 99px;
+  width: 2px;
+  background: var(--edge);
+}
+.tl-item:last-child::before {
+  bottom: 0;
+}
+.tl-entry {
+  display: grid;
+  grid-template-columns: 72px 24px minmax(0, 1fr);
+  column-gap: 16px;
+  align-items: start;
+}
+.tl-version {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 13px;
+  line-height: 24px;
+  color: var(--ink-3);
+}
+.tl-current {
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+.tl-dot {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  width: 12px;
+  height: 12px;
+  margin-top: 6px;
+  background: var(--bg);
+  border: 2px solid var(--edge);
+  border-radius: 50%;
+}
+.tl-item.current .tl-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.tl-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  min-width: 0;
+}
+.tl-title {
+  font-family: var(--sans);
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.tl-entry.compact .tl-title {
+  font-size: 17px;
+}
+.tl-meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+.tl-entry.compact .tl-meta {
+  line-height: 18px;
+}
+.tl-summary {
+  max-width: 70ch;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.tl-changelog {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+.tl-changelog-label {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.tl-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  padding: 0 0 0 16px;
+  list-style: none;
+  border-left: 1px solid var(--line);
+}
+.tl-project {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tl-project-name {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+.tl-project-context {
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.tl-bullets {
+  list-style: disc;
+}
+.tl-bullets li {
+  max-width: 70ch;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.tl-deps {
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+/* Narrow screens: rail on the left edge, version tag above the title */
+@media (max-width: 639px) {
+  .tl-entry {
+    grid-template-columns: 24px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+  .tl-version {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .tl-dot {
+    grid-column: 1;
+  }
+  .tl-body {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .tl-item::before {
+    left: 11px;
+  }
+}
+
 /* ---------- About ---------- */
 .about-narrow {
   width: min(100%, 860px);
