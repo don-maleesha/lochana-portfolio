@@ -1,158 +1,164 @@
 import { useState } from 'react'
-import type { FormEvent } from 'react'
+import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
 import Shell from '../components/Shell'
+import RequestPreview from '../components/RequestPreview'
+import ResponseStatus from '../components/ResponseStatus'
+import type { ResponseState } from '../components/ResponseStatus'
+import EndpointCard from '../components/EndpointCard'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { profile } from '../data/profile'
+import { contactPage as page } from '../data/contact'
 
 type Field = 'name' | 'email' | 'message'
+type Values = Record<Field, string>
 type Errors = Partial<Record<Field, string>>
 
 const FIELDS: Field[] = ['name', 'email', 'message']
+const EMPTY: Values = { name: '', email: '', message: '' }
 
-function validate(form: HTMLFormElement): Errors {
-  const errors: Errors = {}
-  const value = (f: Field) => (form.elements.namedItem(f) as HTMLInputElement | HTMLTextAreaElement).value.trim()
-  if (!value('name')) errors.name = 'Enter your name.'
-  const email = value('email')
-  if (!email) errors.email = 'Enter your email address.'
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = 'Enter an email address like name@example.com.'
-  if (!value('message')) errors.message = 'Enter a message.'
-  return errors
+function validateField(field: Field, value: string): string | undefined {
+  const v = value.trim()
+  if (field === 'name' && !v) return page.errors.name
+  if (field === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return page.errors.email
+  if (field === 'message' && v.length < page.messageMin) return page.errors.message
+  return undefined
 }
 
 export default function Contact() {
   usePageTitle(`Contact — ${profile.name}`)
-  const [sent, setSent] = useState(false)
+  const [values, setValues] = useState<Values>(EMPTY)
   const [errors, setErrors] = useState<Errors>({})
+  const [status, setStatus] = useState<ResponseState>('idle')
+  const sending = status === 'sending'
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  function setFieldError(field: Field, value: string) {
+    setErrors((prev) => ({ ...prev, [field]: validateField(field, value) }))
+  }
+
+  function onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const field = e.target.name as Field
+    setValues((prev) => ({ ...prev, [field]: e.target.value }))
+    // Once a field shows an error, re-check it as the visitor fixes it
+    if (errors[field]) setFieldError(field, e.target.value)
+  }
+
+  function onBlur(e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setFieldError(e.target.name as Field, e.target.value)
+  }
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    if (sending) return
     const form = e.currentTarget
-    const found = validate(form)
+    const found: Errors = {}
+    for (const f of FIELDS) found[f] = validateField(f, values[f])
     setErrors(found)
     const firstInvalid = FIELDS.find((f) => found[f])
     if (firstInvalid) {
-      const el = form.elements.namedItem(firstInvalid) as HTMLElement
-      setSent(false)
-      el.focus()
+      setStatus('invalid')
+      ;(form.elements.namedItem(firstInvalid) as HTMLElement).focus()
       return
     }
-    // TODO: send to a real endpoint (Resend, Formspree, or a serverless function).
-    setSent(true)
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY
+    const botcheck = (form.elements.namedItem('botcheck') as HTMLInputElement).checked
+    setStatus('sending')
+    try {
+      if (!accessKey) throw new Error('VITE_WEB3FORMS_KEY is not set')
+      const res = await fetch(page.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: values.name.trim(),
+          email: values.email.trim(),
+          message: values.message.trim(),
+          subject: page.subject(values.name.trim()),
+          botcheck,
+        }),
+      })
+      const data = (await res.json().catch(() => ({}))) as { success?: boolean }
+      if (!res.ok || !data.success) throw new Error(`Web3Forms responded ${res.status}`)
+      setStatus('success')
+      setValues(EMPTY)
+      setErrors({})
+      form.reset()
+    } catch (err) {
+      console.error('Contact form failed:', err)
+      setStatus('error')
+    }
   }
 
-  // Once errors are showing, re-check as the visitor fixes them
-  function onChange(e: FormEvent<HTMLFormElement>) {
-    if (Object.keys(errors).length > 0) setErrors(validate(e.currentTarget))
-  }
+  const fieldProps = (f: Field) => ({
+    id: `f-${f}`,
+    name: f,
+    value: values[f],
+    onChange,
+    onBlur,
+    placeholder: page.placeholders[f],
+    required: true,
+    'aria-invalid': errors[f] ? true : undefined,
+    'aria-describedby': errors[f] ? `f-${f}-error` : undefined,
+  })
 
-  const describedBy = (f: Field) => (errors[f] ? `f-${f}-error` : undefined)
+  const fieldError = (f: Field) =>
+    errors[f] && (
+      <p id={`f-${f}-error`} className="field-error">
+        {errors[f]}
+      </p>
+    )
 
   return (
     <Shell crumb="contact">
       <div className="stack">
         <section className="stack" style={{ gap: 12 }}>
-          <div className="eyebrow">POST /contact</div>
-          <h1 className="h-page">Send a request</h1>
-          <p className="lede">The contact form is an API console. Fill the body, send, read the response.</p>
+          <div className="eyebrow">{page.eyebrow}</div>
+          <h1 className="h-page">{page.title}</h1>
+          <p className="lede">{page.intro}</p>
         </section>
 
-        <div className="row-wrap">
-          <form className="col card" style={{ padding: 32, gap: 20 }} onSubmit={onSubmit} onChange={onChange} noValidate>
+        <div className="contact-grid">
+          <form className="card contact-form" onSubmit={onSubmit} noValidate>
             <div className="field">
               <label htmlFor="f-name">Name</label>
-              <input
-                id="f-name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                placeholder="[your name]"
-                required
-                aria-invalid={errors.name ? true : undefined}
-                aria-describedby={describedBy('name')}
-              />
-              {errors.name && (
-                <p id="f-name-error" className="field-error">
-                  {errors.name}
-                </p>
-              )}
+              <input type="text" autoComplete="name" {...fieldProps('name')} />
+              {fieldError('name')}
             </div>
             <div className="field">
               <label htmlFor="f-email">Email</label>
-              <input
-                id="f-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="[you@example.com]"
-                required
-                aria-invalid={errors.email ? true : undefined}
-                aria-describedby={describedBy('email')}
-              />
-              {errors.email && (
-                <p id="f-email-error" className="field-error">
-                  {errors.email}
-                </p>
-              )}
+              <input type="email" autoComplete="email" {...fieldProps('email')} />
+              {fieldError('email')}
             </div>
             <div className="field">
               <label htmlFor="f-message">Message</label>
-              <textarea
-                id="f-message"
-                name="message"
-                placeholder="[what would you like to build or discuss?]"
-                required
-                aria-invalid={errors.message ? true : undefined}
-                aria-describedby={describedBy('message')}
-              />
-              {errors.message && (
-                <p id="f-message-error" className="field-error">
-                  {errors.message}
-                </p>
-              )}
+              <textarea {...fieldProps('message')} />
+              {fieldError('message')}
             </div>
-            <button type="submit" className="btn primary" style={{ alignSelf: 'flex-start' }}>
-              Send request
+            {/* Honeypot: hidden from people, filled in by bots */}
+            <input type="checkbox" name="botcheck" className="sr-only" tabIndex={-1} aria-hidden="true" />
+            <button type="submit" className="btn primary" style={{ alignSelf: 'flex-start' }} disabled={sending}>
+              {sending ? page.buttons.sending : page.buttons.idle}
             </button>
             <p className="muted" style={{ fontSize: 13 }}>
-              This demo form doesn’t send or store anything. [Privacy note: how messages will be handled once the
-              form is live.]
+              {page.note}
             </p>
           </form>
 
-          <div className="col stack" style={{ gap: 24 }}>
-            <div className="terminal" aria-live="polite">
-              <div className="eyebrow">Response {sent ? '· demo' : ''}</div>
-              {sent ? (
-                <>
-                  <div style={{ color: 'var(--ok)' }}>201 Created (demo — nothing was actually sent)</div>
-                  <pre className="json">{`{
-  "status": "queued",
-  "message": "[thank-you line]",
-  "reply_in": "[typical reply time]"
-}`}</pre>
-                </>
-              ) : (
-                <p className="muted">Waiting for a request…</p>
-              )}
-            </div>
-
-            <div className="stack" style={{ gap: 12 }}>
-              <div className="eyebrow">Other endpoints</div>
-              <div className="row-wrap" style={{ gap: 12 }}>
-                {[
-                  ['GET /github', '[handle]'],
-                  ['GET /linkedin', '[profile]'],
-                  ['GET /email', '[address]'],
-                ].map(([title, sub]) => (
-                  <div key={title} className="card col" style={{ flexBasis: 160, padding: 16, gap: 4 }}>
-                    <span className="card-title">{title}</span>
-                    <span className="muted" style={{ fontSize: 13 }}>{sub}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="terminal contact-console">
+            <RequestPreview values={values} />
+            <ResponseStatus state={status} />
           </div>
+
+          <section className="stack contact-endpoints" style={{ gap: 12 }} aria-labelledby="endpoints-title">
+            <h2 id="endpoints-title" className="eyebrow">
+              {page.endpointsHeading}
+            </h2>
+            <ul className="endpoint-list">
+              {page.endpoints.map((ep) => (
+                <EndpointCard key={ep.route} endpoint={ep} />
+              ))}
+            </ul>
+          </section>
         </div>
       </div>
     </Shell>

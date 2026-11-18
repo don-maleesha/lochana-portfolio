@@ -11,7 +11,7 @@ Clicking a service on the landing map "deploys" its page.
 - Home, header and About copy is final; projects, experience notes and parts
   of the contact and accessibility pages are still placeholder text in
   `[square brackets]`.
-- The contact form is a demo: it shows a mock response and sends nothing.
+- The contact form sends through Web3Forms once `VITE_WEB3FORMS_KEY` is set.
 - SPA rewrites are configured for Vercel (`vercel.json`) and Netlify
   (`public/_redirects`).
 - `typescript` is aliased to `@typescript/typescript6` so typescript-eslint
@@ -48,7 +48,13 @@ doesn't exist fails `npm run build`.
 | Projects list and project case studies | `src/data/projects.ts` |
 | Experience page (work with project changelogs, and education, as a release timeline) | `src/data/experience.ts` |
 | Search and social preview text (meta description, `og:*`) | `index.html` — keep in sync with the home headline |
-| Contact and Accessibility page copy | `src/pages/Contact.tsx`, `src/pages/Accessibility.tsx` |
+| Contact page copy, response messages and endpoint links (GitHub, LinkedIn, email) | `src/data/contact.ts` |
+| Accessibility page copy | `src/pages/Accessibility.tsx` |
+
+The contact form sends through [Web3Forms](https://web3forms.com). Put the
+access key in `VITE_WEB3FORMS_KEY`: locally in `.env.local` (copy `.env.example`),
+and on Vercel under Project Settings → Environment Variables. Without a key the
+form shows its error state and sends nothing.
 
 Pushing to `main` redeploys the site on Vercel. Run `npm run lint` and
 `npm run build` first; a build error there will also fail the deploy.

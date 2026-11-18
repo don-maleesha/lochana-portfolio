@@ -16,6 +16,7 @@
   /* Not in the base palette: chosen for contrast on the dark surfaces */
   --edge: #5E6584; /* 3.4:1 on --bg for map edges and arrowheads */
   --error: #F87171; /* 6.2:1+ on --bg, --surface and --panel */
+  --warn: #F5B544; /* amber for 422 responses; 9.4:1+ on --panel */
   --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   --sans: 'IBM Plex Sans', system-ui, sans-serif;
   --maxw: 1312px;
@@ -679,6 +680,176 @@ ul.chips {
   padding-top: 24px;
   border-top: 1px solid var(--line);
   font-size: 13px;
+}
+
+/* ---------- Contact ---------- */
+.contact-grid {
+  display: grid;
+  gap: 2rem;
+}
+/* Wide screens: form | sticky console, endpoints underneath. Narrow: form, console, endpoints. */
+@media (min-width: 900px) {
+  .contact-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      'form console'
+      'endpoints endpoints';
+    align-items: start;
+  }
+  .contact-form {
+    grid-area: form;
+  }
+  .contact-console {
+    grid-area: console;
+    position: sticky;
+    top: 2rem;
+  }
+  .contact-endpoints {
+    grid-area: endpoints;
+  }
+}
+.contact-form {
+  gap: 20px;
+  padding: 32px;
+}
+.contact-console {
+  gap: 20px;
+  min-height: 0;
+}
+.console-part {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.console-part + .console-part {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.console-label {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.console-json {
+  overflow-wrap: anywhere;
+}
+.tok-method {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.tok-key {
+  color: var(--accent);
+}
+.tok-str {
+  color: var(--ok);
+}
+.tok-punc {
+  color: var(--ink-3);
+}
+.console-response {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.console-code {
+  font-weight: 600;
+}
+.console-response.idle .console-text,
+.console-response.sending .console-text {
+  color: var(--ink-3);
+}
+.console-response.success .console-code {
+  color: var(--ok);
+}
+.console-response.invalid .console-code {
+  color: var(--warn);
+}
+.console-response.error .console-code {
+  color: var(--error);
+}
+.contact-endpoints h2 {
+  font-weight: 400;
+}
+.endpoint-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Same hover/focus treatment as project cards; the route link covers the card */
+.endpoint-card {
+  position: relative;
+  gap: 4px;
+  padding: 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.endpoint-card:hover,
+.endpoint-card:has(.endpoint-link:focus-visible) {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .endpoint-card:hover,
+  .endpoint-card:has(.endpoint-link:focus-visible) {
+    transform: none;
+  }
+}
+.endpoint-link {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.endpoint-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+}
+.endpoint-link:focus-visible {
+  outline: none;
+}
+.endpoint-link:focus-visible::after {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.endpoint-subtitle {
+  font-size: 13px;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+.endpoint-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.endpoint-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 2px 8px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink-2);
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.endpoint-copy-btn:hover,
+.endpoint-copy-btn:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.endpoint-copied {
+  font-size: 12px;
+  color: var(--ok);
 }
 
 /* ---------- Experience timeline ---------- */

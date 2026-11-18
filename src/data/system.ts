@@ -11,5 +11,5 @@ export const services: Service[] = [
   { id: 'about', label: 'About', path: '/about', method: 'GET', store: { label: 'profile.json', sub: 'bio · skills' } },
   { id: 'projects', label: 'Projects', path: '/projects', method: 'GET', store: { label: 'GitHub API', sub: 'repos · activity' } },
   { id: 'experience', label: 'Experience', path: '/experience', method: 'GET', store: { label: 'work-history', sub: 'roles · timeline' } },
-  { id: 'contact', label: 'Contact', path: '/contact', method: 'POST', store: { label: 'inbox', sub: 'mail queue' } },
+  { id: 'contact', label: 'Contact', path: '/contact', method: 'POST', store: { label: 'Web3Forms', sub: '→ Gmail' } },
 ]
