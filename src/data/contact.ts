@@ -39,13 +39,14 @@ export const contactPage = {
     error: { code: '500 Error', text: `Something went wrong. Email me directly at ${email}.` },
   },
   endpointsHeading: 'Other endpoints',
+  // Direct contact first, then profiles: GitHub (proof of work) before LinkedIn
   endpoints: [
+    { route: 'GET /email', subtitle: email, href: `mailto:${email}`, copy: email },
     { route: 'GET /github', subtitle: 'don-maleesha', href: 'https://github.com/don-maleesha' },
     {
       route: 'GET /linkedin',
       subtitle: 'lochana-thilakarathne',
       href: 'https://www.linkedin.com/in/lochana-thilakarathne-097277269/',
     },
-    { route: 'GET /email', subtitle: email, href: `mailto:${email}`, copy: email },
   ] satisfies Endpoint[],
 }
