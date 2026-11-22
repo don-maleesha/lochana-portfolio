@@ -17,7 +17,7 @@
  */
 
 /** Routes a content link may point to (see App.tsx). */
-export type SitePath = '/' | '/about' | '/projects' | '/experience' | '/contact' | '/accessibility'
+export type SitePath = '/' | '/about' | '/projects' | '/experience' | '/contact'
 
 export type SkillCategory = { name: string; items: string[] }
 export type ContentLink = { label: string; to: SitePath }

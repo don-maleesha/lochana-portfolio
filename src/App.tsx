@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -7,7 +7,6 @@ import Projects from './pages/Projects'
 import CaseStudy from './pages/CaseStudy'
 import Experience from './pages/Experience'
 import Contact from './pages/Contact'
-import Accessibility from './pages/Accessibility'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -28,7 +27,8 @@ export default function App() {
         <Route path="/projects/:slug" element={<CaseStudy />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/accessibility" element={<Accessibility />} />
+        {/* The accessibility page was removed; old links go home */}
+        <Route path="/accessibility" element={<Navigate to="/" replace />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </MotionConfig>

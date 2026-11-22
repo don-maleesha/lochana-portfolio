@@ -8,9 +8,9 @@ Clicking a service on the landing map "deploys" its page.
 
 - Landing system map, routing and all pages (About, Projects, project case
   study, Experience, Contact) are in place.
-- Home, header and About copy is final; projects, experience notes and parts
-  of the contact and accessibility pages are still placeholder text in
-  `[square brackets]`.
+- Home, header, About, Projects and Contact copy is final; a few details are
+  still placeholder text in `[square brackets]` (search the data files).
+- `/accessibility` was removed and now redirects to the home page.
 - The contact form sends through Web3Forms once `VITE_WEB3FORMS_KEY` is set.
 - SPA rewrites are configured for Vercel (`vercel.json`) and Netlify
   (`public/_redirects`).
@@ -30,7 +30,7 @@ Clicking a service on the landing map "deploys" its page.
   `DeployStrip`.
 - `src/hooks/` — `usePageTitle` (per-route document title and focus).
 - `src/pages/` — one component per route: `Home`, `About`, `Projects`,
-  `CaseStudy` (`/projects/:slug`), `Experience`, `Contact`, `Accessibility`.
+  `CaseStudy` (`/projects/:slug`), `Experience`, `Contact`.
 
 ## Editing content
 
@@ -49,7 +49,6 @@ doesn't exist fails `npm run build`.
 | Experience page (work with project changelogs, and education, as a release timeline) | `src/data/experience.ts` |
 | Search and social preview text (meta description, `og:*`) | `index.html` — keep in sync with the home headline |
 | Contact page copy, response messages and endpoint links (GitHub, LinkedIn, email) | `src/data/contact.ts` |
-| Accessibility page copy | `src/pages/Accessibility.tsx` |
 
 The contact form sends through [Web3Forms](https://web3forms.com); see
 [Environment variables](#environment-variables) for its key.

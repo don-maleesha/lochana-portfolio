@@ -55,7 +55,7 @@ export default function Shell({ crumb, topbar, children }: ShellProps) {
         {children}
       </main>
       <footer className="site-footer">
-        <Link to="/accessibility">Accessibility</Link>
+        <p>© {new Date().getFullYear()} Lochana</p>
       </footer>
     </div>
   )
