@@ -55,7 +55,7 @@ export const releases: Release[] = [
         context: 'Seed certification platform, Department of Agriculture, Sri Lanka',
         bullets: [
           'Built and fixed features across the SCS and SPMDC modules in a Spring Boot + React codebase',
-          'Resolved race conditions in multi-step registration forms with cascading dropdowns and auto-fill',
+          'Made multi-step registration forms with cascading dropdowns and auto-fill reliable',
           'Moved S3 file access to on-demand presigned URLs instead of storing them',
           'Wrote the user manual for the Seed Act Registration system',
         ],
@@ -65,7 +65,7 @@ export const releases: Release[] = [
         name: 'Digital Farmer Registry',
         context: 'Ministry of Agriculture (MALFB), Vanuatu',
         bullets: [
-          'Debugged the bulk farmer import API, including MongoDB field-name and non-transactional account-creation issues',
+          'Debugged and stabilised the bulk farmer import API',
           'Produced user and developer guides',
         ],
         deps: ['[fill in]', 'MongoDB', 'Keycloak'],
