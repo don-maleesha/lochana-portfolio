@@ -1099,32 +1099,6 @@ ul.chips {
 .intro-line {
   display: block;
 }
-/* Headshot beside the intro; stacks above it on narrow screens */
-.about-intro {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-.headshot {
-  flex: none;
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  background: var(--surface);
-  border: 1.5px solid var(--ink);
-  border-radius: 8px;
-}
-@media (max-width: 560px) {
-  .about-intro {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  .headshot {
-    width: 128px;
-    height: 128px;
-  }
-}
 .bio-text {
   display: flex;
   flex-direction: column;
