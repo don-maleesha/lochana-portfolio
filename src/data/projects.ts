@@ -10,8 +10,6 @@
  *   context      Meta line, e.g. 'Team of 2 · Learning project'.
  *   summary      One sentence on what was built and by whom, max ~120 characters.
  *   keyStack     3–4 key technologies for the card (only the first 4 are shown).
- *   thumbnail    Optional 16:9 screenshot in public/ (1200×675 WebP); cards show initials without it.
- *   thumbnailAlt What the thumbnail shows (falls back to 'Screenshot of <title>').
  *
  * Case study (every section is optional and is skipped, with sections renumbered, when empty)
  *   role, team, duration  "Quick facts" rows.
@@ -52,8 +50,6 @@ export type ProjectEntry = {
   context: string
   summary: string
   keyStack: string[]
-  thumbnail?: string
-  thumbnailAlt?: string
   // Case study
   role?: string
   team?: string
@@ -107,8 +103,6 @@ export const projects: ProjectEntry[] = [
     context: 'Team of 2 · Learning project',
     summary: 'Cake shop e-commerce app with cart, custom orders, PayHere checkout and an admin dashboard, built with a teammate.',
     keyStack: ['React', 'Tailwind CSS', 'PayHere'],
-    thumbnail: '/projects/cakeshop.webp',
-    thumbnailAlt: 'CakeShop home page with the headline Delicious Cakes Made Fresh Daily, Shop Now and Custom Orders buttons, and a photo of a fruit-topped cake',
     role: 'Full-stack developer',
     team: '2 people',
     duration: '2025',
@@ -220,8 +214,6 @@ export const projects: ProjectEntry[] = [
     context: 'Solo · Learning project',
     summary: 'Solo-built recipe-sharing app for Sri Lankan dishes, with member submissions, admin moderation and ratings.',
     keyStack: ['PHP', 'MySQL', 'JavaScript'],
-    thumbnail: '/projects/ceylon-cuisine.webp',
-    thumbnailAlt: 'Ceylon Cuisine home page welcoming visitors, with Explore and Submit buttons and a photo of a Sri Lankan rice and curry meal',
     role: 'Solo developer',
     team: 'Solo',
     duration: '2024–2025',
@@ -320,8 +312,6 @@ export const projects: ProjectEntry[] = [
     context: 'Team of 4 · University project',
     summary: 'Stress-monitoring and workload app for university students, built by a team of four on a custom PHP MVC.',
     keyStack: ['PHP', 'JavaScript', 'MySQL'],
-    thumbnail: '/projects/relaxu.webp',
-    thumbnailAlt: 'RelaxU home page with the headline Healthy Minds, Happy Lives, Student Mental Health Consultancy, a Get started button and a photo of a student studying',
     role: 'Developer, relaxation activities module',
     team: '4 people',
     duration: '2024–2025',

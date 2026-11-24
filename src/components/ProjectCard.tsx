@@ -6,14 +6,12 @@ import { projectsPage } from '../data/projects'
 
 const FEEDBACK_MS = 250
 
-// "CakeShop" -> "CS", "Ceylon Cuisine" -> "CC", "RelaxU" -> "RU"
-const initials = (title: string) => (title.match(/[A-Z]/g)?.join('') || title).slice(0, 2).toUpperCase()
-
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /**
- * One project on /projects. The title link is stretched over the whole card (see .project-card CSS),
- * so the card is a single link with a short accessible name and nothing else inside is interactive.
+ * One project on /projects. Text only: screenshots appear on the project's own case-study page.
+ * The title link is stretched over the whole card (see .project-card CSS), so the card is a
+ * single link with a short accessible name and nothing else inside is interactive.
  */
 export default function ProjectCard({ project, featured = false }: { project: ProjectEntry; featured?: boolean }) {
   const titleId = `project-${project.slug}`
@@ -36,22 +34,6 @@ export default function ProjectCard({ project, featured = false }: { project: Pr
 
   return (
     <article className={`card project-card${featured ? ' featured' : ''}`} aria-labelledby={titleId}>
-      <div className="project-thumb">
-        {project.thumbnail ? (
-          <img
-            src={project.thumbnail}
-            alt={project.thumbnailAlt ?? `Screenshot of ${project.title}`}
-            width={1200}
-            height={675}
-            loading="lazy"
-          />
-        ) : (
-          <span className="project-thumb-initials" aria-hidden="true">
-            {initials(project.title)}
-          </span>
-        )}
-      </div>
-
       <div className="project-body">
         <div className="project-head">
           <h3 id={titleId} className="project-title">

@@ -367,46 +367,11 @@ ul.chips {
   gap: 16px;
   transition: border-color 0.2s, transform 0.2s;
 }
-.project-card.featured {
-  display: grid;
-  gap: 16px 32px;
-}
-@media (min-width: 768px) {
-  .project-card.featured {
-    grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
-    align-items: center;
-  }
-}
 /* Hover and keyboard focus: accent border and a slight lift */
 .project-card:hover,
 .project-card:has(a:focus-visible) {
   border-color: var(--accent);
   transform: translateY(-2px);
-}
-.project-thumb {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-}
-.project-thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.project-thumb-initials {
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--ink-3);
-}
-.project-card.featured .project-thumb-initials {
-  font-size: 48px;
 }
 .project-body {
   display: flex;
@@ -444,11 +409,6 @@ ul.chips {
   font-size: 16px;
   line-height: 1.6;
   color: var(--ink-2);
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
 }
 .project-cta {
   margin-top: auto;
