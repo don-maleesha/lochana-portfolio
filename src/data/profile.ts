@@ -60,7 +60,7 @@ export const profile: Profile = {
     intro: ['BSc. in Information Systems', 'University of Colombo School of Computing'],
     bioHeading: 'Bio',
     bio: [
-      "I'm a full-stack engineer from Sri Lanka who likes owning a problem end to end, from the schema to the screen. I studied Information Systems at the University of Colombo School of Computing, and my approach still follows that: understand how the people, the data and the process fit together before writing any code.",
+      "I'm a full-stack engineer from Sri Lanka who likes owning a problem end to end, from the schema to the screen. My degree in Information Systems from the University of Colombo School of Computing shaped how I work: I start by understanding how the people, the data and the process fit together, before writing any code.",
       'I build back-end services and web interfaces for government bodies, international organisations and private-sector teams, including agricultural certification and registry systems. These are systems with real users, strict workflows and data that has to be right, which has taught me to value clear data models, predictable APIs and interfaces people can use without a manual.',
       "Away from the keyboard I'm drawn to the night sky, to cricket and to community work. I'm a member of the Old Ranabima Astronomical Society and the Rotaract Club of Kandy, and serve on the committee of the Ranabima Royal College Cricket Foundation. All three reward patience and teamwork, which is most of what good engineering needs too.",
     ],
