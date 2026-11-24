@@ -132,23 +132,35 @@ p {
   justify-content: space-between;
   gap: 8px 16px;
 }
-.theme-toggle {
+.theme-switch {
   flex: none;
-  display: inline-grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  color: var(--ink-2);
-  background: transparent;
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
   border: 1.5px solid var(--line-strong);
   border-radius: 8px;
+}
+.theme-switch button {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--ink-3);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
   cursor: pointer;
 }
-.theme-toggle:hover,
-.theme-toggle:focus-visible {
+.theme-switch button:hover {
   color: var(--accent);
-  border-color: var(--accent);
+}
+.theme-switch button:focus-visible {
+  outline-offset: 1px;
+}
+.theme-switch button[aria-pressed='true'] {
+  color: var(--accent);
+  background: var(--accent-tint);
 }
 .site-footer {
   margin-top: 64px;
@@ -1466,7 +1478,7 @@ pre.json {
 :where(:root[data-theme='light']) .node.store:not(.active):not([data-pulse]) rect {
   stroke: var(--line-strong);
 }
-:where(:root[data-theme='light']) .theme-toggle {
+:where(:root[data-theme='light']) .theme-switch {
   border-color: var(--accent);
 }
 /* Tags are not interactive, so a soft border is enough */

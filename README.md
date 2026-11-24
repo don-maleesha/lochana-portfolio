@@ -49,7 +49,7 @@ doesn't exist fails `npm run build`.
 | Experience page (work with project changelogs, and education, as a release timeline) | `src/data/experience.ts` |
 | Search and social preview text (meta description, `og:*`) | `index.html` — keep in sync with the home headline |
 | Contact page copy, response messages and endpoint links (GitHub, LinkedIn, email) | `src/data/contact.ts` |
-| Colours for the dark and light themes | `src/styles.css`: the `:root` tokens (dark) and `:root[data-theme='light']`. The theme follows the system setting until a visitor uses the header toggle; logic in `src/theme.ts`, mirrored by the inline script in `index.html` |
+| Colours for the dark and light themes | `src/styles.css`: the `:root` tokens (dark) and `:root[data-theme='light']`. The header switch offers System (the default: follows the OS, live), Light and Dark; a Light or Dark choice is saved and pins the theme; logic in `src/theme.ts`, mirrored by the inline script in `index.html` |
 
 The contact form sends through [Web3Forms](https://web3forms.com); see
 [Environment variables](#environment-variables) for its key.
