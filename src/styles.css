@@ -1445,9 +1445,18 @@ pre.json {
 :where(:root[data-theme='light']) .chip {
   border-color: #D4D4D8;
 }
-/* Inputs and outline buttons keep a 3:1+ boundary (#71717A is 4.6:1+);
-   hover, focus, invalid and primary states above still override */
-:where(:root[data-theme='light']) .btn,
+/* Outline buttons match the cards: their text labels identify them, and hover/focus still
+   turns the border accent. Primary buttons keep their accent fill and border. */
+:where(:root[data-theme='light']) .btn {
+  border-width: 1px;
+  border-color: #D4D4D8;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+}
+:where(:root[data-theme='light']) .btn.primary {
+  box-shadow: none;
+}
+/* Inputs keep a 3:1+ boundary (#71717A is 4.6:1+) so empty fields stay visible;
+   focus and invalid states above still override */
 :where(:root[data-theme='light']) .field input,
 :where(:root[data-theme='light']) .field textarea {
   border-color: var(--edge);
