@@ -22,6 +22,28 @@
   --maxw: 1312px;
 }
 
+/* Light theme: same roles as above. Text tokens are at least 4.5:1 on --bg, --surface and
+   --panel; --edge is 4.4:1+. Set by index.html / src/theme.ts via data-theme on <html>.
+   Light-only border and shadow rules are at the end of this file. */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #FAFAFA;
+  --surface: #FFFFFF;
+  --panel: #F4F4F5; /* contact console, code blocks */
+  --ink: #18181B; /* 16.1:1+ */
+  --ink-2: #3F3F46; /* 9.5:1+ */
+  --ink-3: #5B5B66; /* 6.1:1+ */
+  --line: #E4E4E7; /* dividers */
+  --line-strong: #909098; /* dashed DATA boxes, 3.0:1+ on --bg and --surface */
+  --accent: #4F46E5; /* 5.7:1+ as text */
+  --accent-tint: #EEF2FF;
+  --ok: #166534; /* 6.5:1+ */
+  --on-accent: #FFFFFF; /* 6.3:1 on --accent */
+  --edge: #71717A; /* map arrows and connectors, 4.4:1+ */
+  --error: #B91C1C; /* 5.9:1+ */
+  --warn: #92400E; /* 6.4:1+ */
+}
+
 *,
 *::before,
 *::after {
@@ -69,7 +91,6 @@ p {
 }
 .topbar {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -100,6 +121,34 @@ p {
 .cta-row a:hover,
 .cta-row a:focus-visible {
   color: var(--accent);
+}
+/* Page-specific header content on the left, the theme toggle pinned to the right */
+.topbar-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.theme-toggle {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--ink-2);
+  background: transparent;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 .site-footer {
   margin-top: 64px;
@@ -1385,4 +1434,49 @@ pre.json {
     animation: none !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---------- Light theme: softer borders ----------
+   Cards and map nodes swap the heavy --ink outline for a 1px grey border and a faint shadow.
+   :where() keeps these at the specificity of the base rules, so every hover, focus,
+   active and selected state above still wins with the accent colour. */
+:where(:root[data-theme='light']) .card,
+:where(:root[data-theme='light']) .map-mobile a {
+  border-width: 1px;
+  border-color: #D4D4D8;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+}
+:where(:root[data-theme='light']) .card.dashed {
+  border-color: var(--line-strong);
+  box-shadow: none;
+}
+:where(:root[data-theme='light']) .terminal {
+  border-width: 1px;
+  border-color: #D4D4D8;
+}
+:where(:root[data-theme='light']) .node rect {
+  stroke: #D4D4D8;
+  stroke-width: 1;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.06));
+}
+/* Data stores stay dashed and unshadowed; the pulse and active states still set the stroke */
+:where(:root[data-theme='light']) .node.store rect {
+  filter: none;
+}
+:where(:root[data-theme='light']) .node.store:not(.active):not([data-pulse]) rect {
+  stroke: var(--line-strong);
+}
+:where(:root[data-theme='light']) .theme-toggle {
+  border-color: var(--accent);
+}
+/* Tags are not interactive, so a soft border is enough */
+:where(:root[data-theme='light']) .chip {
+  border-color: #D4D4D8;
+}
+/* Inputs and outline buttons keep a 3:1+ boundary (#71717A is 4.6:1+);
+   hover, focus, invalid and primary states above still override */
+:where(:root[data-theme='light']) .btn,
+:where(:root[data-theme='light']) .field input,
+:where(:root[data-theme='light']) .field textarea {
+  border-color: var(--edge);
 }

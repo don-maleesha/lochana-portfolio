@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import DeployStrip from './DeployStrip'
+import ThemeToggle from './ThemeToggle'
 import { availability } from '../data/availability'
 import { profile } from '../data/profile'
 
@@ -22,33 +23,36 @@ export default function Shell({ crumb, topbar, children }: ShellProps) {
         Skip to content
       </a>
       <header className="topbar">
-        {topbar ?? (
-          <>
-            {trail.length > 0 ? (
-              <nav aria-label="Breadcrumb" className="crumbs">
-                <Link to="/">← map</Link>
-                {trail.map((c, i) => (
-                  <span key={c.label}>
-                    <span aria-hidden="true"> / </span>
-                    {c.to && i < trail.length - 1 ? <Link to={c.to}>{c.label}</Link> : <span aria-current="page">{c.label}</span>}
-                  </span>
-                ))}
-              </nav>
-            ) : (
-              <Link to="/" className="wordmark">
-                <span className="wordmark-full">{profile.name}</span>
-                <span className="wordmark-short">{profile.shortName}</span>
-              </Link>
-            )}
-            {/* Static text, not a live region: the words carry the meaning, the dot is decoration */}
-            {availability.show && (
-              <div className="status">
-                <span className="dot" aria-hidden="true" />
-                {availability.text}
-              </div>
-            )}
-          </>
-        )}
+        <div className="topbar-content">
+          {topbar ?? (
+            <>
+              {trail.length > 0 ? (
+                <nav aria-label="Breadcrumb" className="crumbs">
+                  <Link to="/">← map</Link>
+                  {trail.map((c, i) => (
+                    <span key={c.label}>
+                      <span aria-hidden="true"> / </span>
+                      {c.to && i < trail.length - 1 ? <Link to={c.to}>{c.label}</Link> : <span aria-current="page">{c.label}</span>}
+                    </span>
+                  ))}
+                </nav>
+              ) : (
+                <Link to="/" className="wordmark">
+                  <span className="wordmark-full">{profile.name}</span>
+                  <span className="wordmark-short">{profile.shortName}</span>
+                </Link>
+              )}
+              {/* Static text, not a live region: the words carry the meaning, the dot is decoration */}
+              {availability.show && (
+                <div className="status">
+                  <span className="dot" aria-hidden="true" />
+                  {availability.text}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        <ThemeToggle />
       </header>
       <main id="main" tabIndex={-1}>
         <DeployStrip />

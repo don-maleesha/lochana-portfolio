@@ -7,6 +7,19 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B0D14" />
+    <script>
+      // Apply the saved theme, or the system one, before first paint so the page never flashes.
+      // Same key and fallback as src/theme.ts.
+      ;(function () {
+        var t
+        try {
+          t = localStorage.getItem('theme')
+        } catch (e) {}
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        document.documentElement.dataset.theme = t
+        if (t === 'light') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#FAFAFA')
+      })()
+    </script>
     <meta name="description" content="Lochana Thilakarathne — Trainee – Software Engineer. Transforming ideas into digital experiences." />
     <meta property="og:description" content="Lochana Thilakarathne — Trainee – Software Engineer. Transforming ideas into digital experiences." />
     <meta property="og:title" content="Lochana Thilakarathne — Software Engineer" />
